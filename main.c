@@ -6,7 +6,7 @@
 /*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 13:51:24 by arafeeq           #+#    #+#             */
-/*   Updated: 2023/04/30 15:00:12 by arafeeq          ###   ########.fr       */
+/*   Updated: 2023/04/30 20:23:35 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,34 +17,37 @@ int main(int argc, char **argv)
 {
 	(void)argv;
 	(void)argc;
-	//t_cub	*cub;
-	t_map	*map;
+	t_cub	*cub;
 	int i = 0;
 	int j = 0;
 
 	//parse
-	map = malloc(sizeof(t_map));
-	get_map(map, argv[1]);
-	printf("map height = %d\n", map->height);
-	while (i < map->height)
+	cub = malloc(sizeof(t_cub));
+	cub->map = malloc(sizeof(t_map));
+	get_map(cub->map, argv[1]);
+	printf("map height = %d\n", cub->map->height);
+	while (i < cub->map->height)
 	{
-		while (j < map->width)
+		while (j < cub->map->width)
 		{
-			printf("%d ", map->map_2d[i][j]);
+			printf("%d ", cub->map->map_2d[i][j]);
 			j++;
 		}
 		printf("\n");
 		j = 0;
 		i++;
 	}
-	// cub = malloc(sizeof(t_cub));
-	// cub->i = malloc(sizeof(t_image));
-	// cub->mlx = mlx_init();
-	// cub->win = mlx_new_window(cub->mlx, 1000, 800, "Cub3D");
-	// cub->i->i = mlx_new_image(cub->mlx, 1000, 800);
-	// cub->i->addr = mlx_get_data_addr(cub->i->i, &cub->i->bpp, &cub->i->l_len, &cub->i->e);
-	// mlx_put_image_to_window(cub->mlx, cub->win, cub->i->i, 0, 0);
-	// mlx_loop(cub->mlx);
+	cub->zoom = 64;
+	cub->win_length = 1000;
+	cub->win_width = 800;
+	cub->i = malloc(sizeof(t_image));
+	cub->mlx = mlx_init();
+	cub->win = mlx_new_window(cub->mlx, cub->win_length, cub->win_width, "Cub3D");
+	cub->i->i = mlx_new_image(cub->mlx, cub->win_length, cub->win_width);
+	cub->i->addr = mlx_get_data_addr(cub->i->i, &cub->i->bpp, &cub->i->l_len, &cub->i->e);
+	draw(&cub);
+	mlx_put_image_to_window(cub->mlx, cub->win, cub->i->i, 0, 0);
+	mlx_loop(cub->mlx);
 
 	//----FREE----
 	// free(cub->i);
@@ -52,9 +55,17 @@ int main(int argc, char **argv)
 	return(0);
 }
 
-// int main(int argc, char **argv)
-// {
-// 	printf("argc = %d\n", argc);
-// 	printf("op = %s\n" ,argv[2]);
-// 	return (0);
-// }
+t_balg	*allocate_balg(double *x, double *y, double *x2, double *y2)
+{
+	t_balg	*b_alg;
+
+	b_alg = malloc(sizeof(t_balg));
+	b_alg->delta_x = fabs(*x2 - *x);
+	b_alg->delta_y = fabs(*y2 - *y);
+	b_alg->step_1 = get_sign(*x2 - *x);
+	b_alg->step_2 = get_sign(*y2 - *y);
+	b_alg->swap = swap_content(&b_alg->delta_x, &b_alg->delta_y);
+	b_alg->diff = 2 * b_alg->delta_y - b_alg->delta_x;
+	b_alg->i = -1;
+	return (b_alg);
+}

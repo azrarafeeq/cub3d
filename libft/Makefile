@@ -6,7 +6,7 @@
 #    By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/19 11:59:12 by arafeeq           #+#    #+#              #
-#    Updated: 2022/11/30 19:29:04 by arafeeq          ###   ########.fr        #
+#    Updated: 2023/04/30 20:29:28 by arafeeq          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ SRCS =	ft_isalpha ft_isdigit ft_isalnum ft_isascii ft_isprint\
 		ft_strtrim ft_split ft_itoa ft_strmapi ft_striteri\
 		ft_putchar_fd ft_putstr_fd ft_putendl_fd ft_putnbr_fd\
 		ft_lstnew ft_lstadd_front ft_lstsize ft_lstlast\
-		ft_lstadd_back ft_lstdelone ft_lstclear ft_lstiter ft_lstmap
+		ft_lstadd_back ft_lstdelone ft_lstclear ft_lstiter ft_lstmap ft_strcmp
 
 OBJDIR = libft_objects
 

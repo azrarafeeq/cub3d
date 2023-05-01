@@ -6,13 +6,13 @@
 #    By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 02:20:26 by arafeeq           #+#    #+#              #
-#    Updated: 2023/04/30 14:51:52 by arafeeq          ###   ########.fr        #
+#    Updated: 2023/04/30 20:05:07 by arafeeq          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 
-SRCS = main read_map free
+SRCS = main read_map free bressenham draw
 
 GNLSRCS = ./get_next_line/get_next_line.c\
 		./get_next_line/get_next_line_utils.c
@@ -23,11 +23,11 @@ OBJS = $(addprefix $(OBJDIR)/, $(addsuffix .o, $(SRCS)))
 
 CC = cc
 
-MLX_FLAGS = -Lminilibx -lmlx -framework OpenGL -framework AppKit -fsanitize=address -g3
+MLX_FLAGS = -Lminilibx -lmlx -framework OpenGL -framework AppKit
 
 LIBFT = -Llibft -lft
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
 
 $(OBJDIR)/%.o : %.c
 	@mkdir -p $(OBJDIR)

@@ -6,7 +6,7 @@
 /*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 13:34:25 by arafeeq           #+#    #+#             */
-/*   Updated: 2023/04/30 15:00:01 by arafeeq          ###   ########.fr       */
+/*   Updated: 2023/04/30 20:27:42 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,12 @@ void	read_map(t_map *map, int fd)
 		split = ft_split(line, ' ');
 		map->map_2d[i] = (int *) malloc(sizeof(int) * map->width);
 		while (split[++j] && j != map->width)
-			map->map_2d[i][j] = ft_atoi(split[j]);
+		{
+			if (ft_strcmp(split[j], "P") == 0)
+				map->map_2d[i][j] = 2;
+			else
+				map->map_2d[i][j] = ft_atoi(split[j]);
+		}
 		free_char_array(split);
 		free(line);
 		line = get_next_line(fd);
