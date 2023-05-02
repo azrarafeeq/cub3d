@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalhmoud <aalhmoud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 22:34:41 by aalhmoud          #+#    #+#             */
-/*   Updated: 2023/05/01 22:35:11 by aalhmoud         ###   ########.fr       */
+/*   Updated: 2023/05/02 12:20:57 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Includes/cub3d.h"
+#include "cub3d.h"
 
 void	ft_color_chars_init_checker(t_all *all)
 {

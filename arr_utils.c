@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   arr_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalhmoud <aalhmoud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 22:34:41 by aalhmoud          #+#    #+#             */
-/*   Updated: 2023/05/01 22:37:39 by aalhmoud         ###   ########.fr       */
+/*   Updated: 2023/05/02 12:20:44 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Includes/cub3d.h"
+#include "cub3d.h"
 
 size_t	ft_arr_len(char **arr)
 {

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalhmoud <aalhmoud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 22:34:41 by aalhmoud          #+#    #+#             */
-/*   Updated: 2023/05/01 22:35:29 by aalhmoud         ###   ########.fr       */
+/*   Updated: 2023/05/02 22:17:22 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Includes/cub3d.h"
+#include "cub3d.h"
 
 int	ft_quit(t_all *all)
 {
@@ -19,25 +19,25 @@ int	ft_quit(t_all *all)
 
 	i = -1;
 	excode = all->exit;
-	if (all->mlx->mlx_win)
-		mlx_destroy_window(all->mlx->mlx, all->mlx->mlx_win);
-	if (all->mlx->tex)
-		mlx_destroy_image(all->mlx->mlx, all->mlx->tex);
-	if (all->mlx->tex2)
-		mlx_destroy_image(all->mlx->mlx, all->mlx->tex2);
-	if (all->mlx->tex3)
-		mlx_destroy_image(all->mlx->mlx, all->mlx->tex3);
-	if (all->mlx->tex4)
-		mlx_destroy_image(all->mlx->mlx, all->mlx->tex4);
-	if (all->mlx->tex5)
-		mlx_destroy_image(all->mlx->mlx, all->mlx->tex5);
-	if (all->mlx->tex6)
-		mlx_destroy_image(all->mlx->mlx, all->mlx->tex6);
-	if (all->mlx->buffer)
-		while (++i < all->size->win_y)
-			free(all->mlx->buffer[i]);
-	free(all->mlx->buffer);
-	ft_free_all(all);
+	// if (all->mlx->mlx_win)
+	// 	mlx_destroy_window(all->mlx->mlx, all->mlx->mlx_win);
+	// if (all->mlx->tex)
+	// 	mlx_destroy_image(all->mlx->mlx, all->mlx->tex);
+	// if (all->mlx->tex2)
+	// 	mlx_destroy_image(all->mlx->mlx, all->mlx->tex2);
+	// if (all->mlx->tex3)
+	// 	mlx_destroy_image(all->mlx->mlx, all->mlx->tex3);
+	// if (all->mlx->tex4)
+	// 	mlx_destroy_image(all->mlx->mlx, all->mlx->tex4);
+	// if (all->mlx->tex5)
+	// 	mlx_destroy_image(all->mlx->mlx, all->mlx->tex5);
+	// if (all->mlx->tex6)
+	// 	mlx_destroy_image(all->mlx->mlx, all->mlx->tex6);
+	// if (all->mlx->buffer)
+	// 	while (++i < all->size->win_y)
+	// 		free(all->mlx->buffer[i]);
+	// free(all->mlx->buffer);
+	//ft_free_all(all);
 	exit(excode);
 }
 

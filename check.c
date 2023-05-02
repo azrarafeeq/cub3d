@@ -1,50 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalhmoud <aalhmoud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/06 22:34:41 by aalhmoud          #+#    #+#             */
-/*   Updated: 2023/05/01 22:35:41 by aalhmoud         ###   ########.fr       */
+/*   Created: 2023/05/02 22:29:08 by arafeeq           #+#    #+#             */
+/*   Updated: 2023/05/02 22:31:09 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Includes/cub3d.h"
+#include "cub3d.h"
 
-void	ft_map_valid_structure(t_all *all, int *i, size_t *nl)
+void	check_w(char c, t_all *all)
 {
-	while (all->mapl[++(*i)] && *nl < 7)
+	if (c == 'W')
 	{
-		if (all->mapl[*i] == '\n')
-			*i = *i + 1;
-		else if (all->mapl[*i] != '\n')
-		{
-			*nl = *nl + 1;
-			while (all->mapl[*i] != '\n')
-				*i = *i + 1;
-		}
+		all->size->where = 3;
+		direction(all->size);
+		(all->detector_flag)++;
 	}
+	if (all->detector_flag > 1)
+		ft_error(all, 5);
 }
 
-void	ft_map_valid_char(t_all *all, int i, size_t nl)
+void	check_pos(char c, t_all *all)
 {
-	ft_map_valid_structure(all, &i, &nl);
-	while (all->mapl[i])
+	if (c == 'N')
 	{
-		if (all->mapl[i] == '1' || all->mapl[i] == '0' || all->mapl[i] == 'N'
-			|| all->mapl[i] == 'S' || all->mapl[i] == 'E' || all->mapl[i] == 'W'
-			|| all->mapl[i] == ' ' || all->mapl[i] == '\n')
-		{
-			check_pos(all->mapl[i], all);
-			if (all->mapl[i] == '\n'
-				&& all->mapl[i + 1] == '\n' && all->mapl[i + 2])
-				ft_error(all, 8);
-		}
-		else
-			ft_error(all, 7);
-		i++;
+		all->size->where = 0;
+		direction(all->size);
+		all->detector_flag++;
 	}
+	if (c == 'E')
+	{
+		all->size->where = 1;
+		direction(all->size);
+		all->detector_flag++;
+	}
+	if (c == 'S')
+	{
+		all->size->where = 2;
+		direction(all->size);
+		all->detector_flag++;
+	}
+	check_w(c, all);
 }
 
 void	ft_check_walls(t_all *all)

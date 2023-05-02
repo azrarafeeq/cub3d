@@ -3,26 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   basic_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalhmoud <aalhmoud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 22:34:41 by aalhmoud          #+#    #+#             */
-/*   Updated: 2023/05/01 22:35:03 by aalhmoud         ###   ########.fr       */
+/*   Updated: 2023/05/02 15:02:23 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Includes/cub3d.h"
+#include "cub3d.h"
 
-size_t	ft_strlen(const char *str)
-{
-	size_t	l;
+// size_t	ft_strlen(const char *str)
+// {
+// 	size_t	l;
 
-	l = 0;
-	if (!str)
-		return (0);
-	while (str[l])
-		l++;
-	return (l);
-}
+// 	l = 0;
+// 	if (!str)
+// 		return (0);
+// 	while (str[l])
+// 		l++;
+// 	return (l);
+// }
 
 int	ft_strncmp(const char *str1, const char *str2, size_t n)
 {

@@ -6,13 +6,34 @@
 #    By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 02:20:26 by arafeeq           #+#    #+#              #
-#    Updated: 2023/04/30 20:05:07 by arafeeq          ###   ########.fr        #
+#    Updated: 2023/05/02 22:47:07 by arafeeq          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = cub3D
+# ifndef VERPOSE
+# .SILENT:
+# endif
 
-SRCS = main read_map free bressenham draw
+R	= "\033[1;31m"
+G	= "\033[1;32m"
+Y	= "\033[1;33m"
+B	= "\033[1;34m"
+C	= "\033[0;36m"
+P	= "\033[0;35m"
+RS	= "\033[0m"
+
+
+NAME = cub3d
+
+SRCS = cub3d ft_bzero ft_init player_move check get_texture \
+parsing \
+parsing_utils \
+base \
+number_parsing_utils \
+arr_utils \
+basic_utils \
+colors \
+error \
 
 GNLSRCS = ./get_next_line/get_next_line.c\
 		./get_next_line/get_next_line_utils.c

@@ -6,18 +6,20 @@
 /*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 14:36:54 by arafeeq           #+#    #+#             */
-/*   Updated: 2022/05/13 17:13:59 by arafeeq          ###   ########.fr       */
+/*   Updated: 2023/05/02 15:03:08 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+size_t	ft_strlen(const char *str)
 {
-	size_t	i;
+	size_t	len;
 
-	i = 0;
-	while (s[i] != '\0')
-		i++;
-	return (i);
+	len = 0;
+	if (!str)
+		return (0);
+	while (str[len])
+		len++;
+	return (len);
 }

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalhmoud <aalhmoud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 22:34:41 by aalhmoud          #+#    #+#             */
-/*   Updated: 2023/05/01 22:35:23 by aalhmoud         ###   ########.fr       */
+/*   Updated: 2023/05/02 22:45:52 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Includes/cub3d.h"
+#include "cub3d.h"
 
 void	ft_read(int fd, t_all *all)
 {
@@ -46,7 +46,7 @@ void	ft_map_checker(t_all *all)
 	fd = open(all->map_file, O_RDONLY);
 	ft_read(fd, all);
 	close(fd);
-	all->splmap = ft_split(all->mapl, all);
+	all->splmap = ft_split_all(all->mapl, all);
 	ft_config_sort(all);
 	all->textures = ft_arr_dup(all->splmap, 0, 4);
 	all->colors = ft_arr_dup(all->splmap, 4, 2);
@@ -58,7 +58,7 @@ void	ft_map_checker(t_all *all)
 	ft_check_walls(all);
 	ft_check_space(all, -1, -1);
 	ft_check_zero(all);
-	ft_texture(all);
+	//ft_texture(all);
 	ft_player_position(all);
 }
 
@@ -107,16 +107,23 @@ void	ft_map_extension(t_all *all)
 
 int	main(int argc, char **argv)
 {
-	t_all	all;
-	t_mlx	mlx;
-	t_size	size;
+	t_all		all;
+	t_cub		cub;
+	t_size		size;
+	t_player	player;
 
-	mlx_struct_init(&mlx, &size, &all);
+	(void)argc;
+	(void)argv;
+	all_struct_init(&all, &cub, &size);
+	player_init(&all, &player);
 	if (argc == 2)
 	{
 		all.map_file = ft_strdup(argv[1]);
 		ft_map_checker(&all);
-		mlx_main_loop(&all, all.map);
+		//draw
+		//mlx_main_loop(&all, all.map);
+		mlx_put_image_to_window(all.cub->mlx, all.cub->win, all.cub->i->i, 0, 0);
+		mlx_loop(all.cub->mlx);
 	}
 	else
 		ft_error(&all, 1);

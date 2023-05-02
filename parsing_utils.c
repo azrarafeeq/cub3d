@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalhmoud <aalhmoud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 22:34:41 by aalhmoud          #+#    #+#             */
-/*   Updated: 2023/05/01 22:35:38 by aalhmoud         ###   ########.fr       */
+/*   Updated: 2023/05/02 21:36:26 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Includes/cub3d.h"
+#include "cub3d.h"
 
 char	*ft_strdup(const char *str)
 {
@@ -59,7 +59,7 @@ size_t	ft_wordcount(char *str)
 	return (nb);
 }
 
-char	**ft_split(char *str, t_all *all)
+char	**ft_split_all(char *str, t_all *all)
 {
 	char	**ret;
 	size_t	wordc;
