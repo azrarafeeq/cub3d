@@ -12,39 +12,24 @@
 
 #include "cub3d.h"
 
-void	check_w(char c, t_all *all)
-{
-	if (c == 'W')
-	{
-		all->size->where = 3;
-		direction(all->size);
-		(all->detector_flag)++;
-	}
-	if (all->detector_flag > 1)
-		ft_error(all, 5);
-}
-
 void	check_pos(char c, t_all *all)
 {
 	if (c == 'N')
-	{
 		all->size->where = 0;
-		direction(all->size);
-		all->detector_flag++;
-	}
 	if (c == 'E')
-	{
 		all->size->where = 1;
-		direction(all->size);
-		all->detector_flag++;
-	}
 	if (c == 'S')
-	{
 		all->size->where = 2;
+	if (c == 'W')
+		all->size->where = 3;
+	if (c == 'N' || c == 'E' || c == 'S' || c == 'W')
+	{
 		direction(all->size);
 		all->detector_flag++;
 	}
-	check_w(c, all);
+	if (all->detector_flag > 1)
+		ft_error(all, 5);
+
 }
 
 void	ft_check_walls(t_all *all)
@@ -121,4 +106,50 @@ void	ft_check_zero(t_all *all)
 			}
 		}
 	}
+}
+
+int	check_wall_collisions_y(t_all *all)
+{
+	double	checker;
+	int		flag;
+
+	flag = 0;
+	checker = 0.1;
+	while (checker <= all->size->movespeed)
+	{
+		if (all->map[(int)
+				(all->size->posx)][(int)
+			(all->size->posy + all->size->diry * checker)] == '1')
+			return (0);
+		checker += 0.1;
+		if (checker > all->size->movespeed && !flag)
+		{
+			checker = all->size->movespeed;
+			flag = 1;
+		}
+	}
+	return (1);
+}
+
+int	check_wall_collisions_x(t_all *all)
+{
+	double	checker;
+	int		flag;
+
+	flag = 0;
+	checker = 0.1;
+	while (checker <= all->size->movespeed)
+	{
+		if (all->map[(int)
+				(all->size->posx + all->size->dirx * all->size->movespeed)]
+			[(int)(all->size->posy)] == '1')
+			return (0);
+		checker += 0.1;
+		if (checker > all->size->movespeed && !flag)
+		{
+			checker = all->size->movespeed;
+			flag = 1;
+		}
+	}
+	return (1);
 }

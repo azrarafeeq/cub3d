@@ -57,29 +57,6 @@
 # include "./libft/libft.h"
 # include "./get_next_line/get_next_line.h"
 
-typedef struct s_coords {
-	double	x;
-	double	y;
-}				t_coords;
-
-typedef struct s_image {
-	void	*i;
-	char	*addr;
-	int		bpp;
-	int		l_len;
-	int		e;
-}				t_image;
-
-// typedef struct s_balg {
-// 	double	delta_x;
-// 	double	delta_y;
-// 	int		step_1;
-// 	int		step_2;
-// 	double	diff;
-// 	int		swap;
-// 	int		i;
-// }				t_balg;
-
 typedef struct s_cub{
 	void		*mlx;
 	void		*win;
@@ -92,18 +69,18 @@ typedef struct s_cub{
 	t_image		*i;
 }				t_cub;
 
-typedef struct s_player
-{
-	float	x;
-	float	y;
-	float	width;
-	float	height;
-	int		turn_direction; // -1 for left, +1 for right
-	int		walk_direction; // -1 for back, +1 for front
-	float	rotation_angle;
-	float	walk_speed;
-	float	turn_speed;
-}				t_player;
+// typedef struct s_player
+// {
+// 	float	x;
+// 	float	y;
+// 	float	width;
+// 	float	height;
+// 	int		turn_direction; // -1 for left, +1 for right
+// 	int		walk_direction; // -1 for back, +1 for front
+// 	float	rotation_angle;
+// 	float	walk_speed;
+// 	float	turn_speed;
+// }				t_player;
 
 // struct Ray {
 //     float rayAngle;
@@ -196,7 +173,7 @@ typedef struct s_all
 	char	**colors; // stores the colours from the splitted map
 	char	**map; // stores the map from th esplitted map
 	int		exit; // code to exit
-	int		detector_flag; // flag to detect errors...exits when it is set to 0
+	int		detector_flag; // flag to detect errors..ets if more than 1
 	//int		flag; --??
 }			t_all;
 
@@ -212,7 +189,6 @@ void	ft_color_chars_checker(t_all *all, size_t i, size_t a, int comma);
 int		ft_find_index(t_all *all, char **arr, char *s, size_t size);
 void	ft_color_parse(t_all *all);
 void	where_0(t_size *size);
-void	check_w(char c, t_all *all);
 void	check_pos(char c, t_all *all);
 void	direction(t_size *size);
 void	all_struct_init(t_all *all, t_cub *cub, t_size *size);
