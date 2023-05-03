@@ -114,17 +114,16 @@ int	main(int argc, char **argv)
 
 	(void)argc;
 	(void)argv;
+	if (argc != 2)
+	{
+		ft_putstr_fd(RED, 2);
+		ft_putstr_fd("Invalid amount of arguments\n", 2);
+		ft_putstr_fd(RESET, 2);
+		exit(0);
+	}
 	all_struct_init(&all, &cub, &size);
 	player_init(&all, &player);
-	if (argc == 2)
-	{
-		all.map_file = ft_strdup(argv[1]);
-		ft_map_checker(&all);
-		//draw
-		//mlx_main_loop(&all, all.map);
-		mlx_put_image_to_window(all.cub->mlx, all.cub->win, all.cub->i->i, 0, 0);
-		mlx_loop(all.cub->mlx);
-	}
-	else
-		ft_error(&all, 1);
+	all.map_file = ft_strdup(argv[1]);
+	ft_map_checker(&all);
+	mlx_main_loop(&all, all.map);
 }

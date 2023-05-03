@@ -13,18 +13,24 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# define WIN_HEIGHT 800
+# define WIN_WIDTH 1000
+# define BLOCK_SIZE 64
+# define NEXT_STEP 10
+
 # define FRAME_SIZE 64
-# define UP_ARROW 125
-# define DOWN_ARROW 126
+# define UP_ARROW 126
+# define DOWN_ARROW 125
 # define RIGHT_ARROW 124
 # define LEFT_ARROW 123
+# define ESC 52
 
 # define W 13
-# define A 2
+# define A 0
 # define S 1
-# define D 0
+# define D 2
 
-# define R "\033[1;31m"
+# define RED "\033[1;31m"
 # define G "\033[1;32m"
 # define Y "\033[1;33m"
 # define B "\033[1;34m"
@@ -35,7 +41,8 @@
 # define HEX "0123456789ABCDEF"
 # define DEC "0123456789"
 
-# define FOV_ANGLE (60 * (PI / 180))
+# define FOV_ANGLE (60 * (M_PI / 180))
+# define 
 
 # include <math.h>
 # include <time.h>
@@ -63,15 +70,15 @@ typedef struct s_image {
 	int		e;
 }				t_image;
 
-typedef struct s_balg {
-	double	delta_x;
-	double	delta_y;
-	int		step_1;
-	int		step_2;
-	double	diff;
-	int		swap;
-	int		i;
-}				t_balg;
+// typedef struct s_balg {
+// 	double	delta_x;
+// 	double	delta_y;
+// 	int		step_1;
+// 	int		step_2;
+// 	double	diff;
+// 	int		swap;
+// 	int		i;
+// }				t_balg;
 
 typedef struct s_cub{
 	void		*mlx;
@@ -97,6 +104,19 @@ typedef struct s_player
 	float	walk_speed;
 	float	turn_speed;
 }				t_player;
+
+// struct Ray {
+//     float rayAngle;
+//     float wallHitX;
+//     float wallHitY;
+//     float distance;
+//     int wasHitVertical;
+//     int isRayFacingUp;
+//     int isRayFacingDown;
+//     int isRayFacingLeft;
+//     int isRayFacingRight;
+//     int wallHitContent;
+// }
 
 typedef struct s_size
 {
