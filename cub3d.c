@@ -14,27 +14,24 @@
 
 void	ft_read(int fd, t_all *all)
 {
-	char	*buffer;
 	char	*mapline;
-	int		rd;
+	char 	*line;
 
-	rd = 1;
 	mapline = ft_strdup("");
-	buffer = malloc(2);
 	mapline[0] = 0;
-	buffer[1] = 0;
-	while (rd == 1)
+	line = get_next_line(fd);
+	if (!line)
 	{
-		rd = read(fd, &buffer[0], 1);
-		if (rd == -1)
-		{
-			free(buffer);
-			free(mapline);
-			ft_error(all, 3);
-		}
-		mapline = ft_strjoin(mapline, buffer);
+		write(2, "Error: Map is Empty\n", 21);
+		close(fd);
+		ft_error(all, 3);
+		exit(0);
 	}
-	free(buffer);
+	while (line)
+	{
+		mapline = ft_strjoin(mapline, line);
+		line = get_next_line(fd); 
+	}
 	all->mapl = mapline;
 }
 
@@ -58,7 +55,7 @@ void	ft_map_checker(t_all *all)
 	ft_check_walls(all);
 	ft_check_space(all, -1, -1);
 	ft_check_zero(all);
-	//ft_texture(all);
+	ft_texture(all);
 	ft_player_position(all);
 }
 
