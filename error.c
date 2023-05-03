@@ -44,7 +44,7 @@ int	ft_quit(t_all *all)
 void	ft_error(t_all *all, int error)
 {
 	all->exit = error;
-	ft_putstr_fd(RED, 2)
+	ft_putstr_fd(RED, 2);
 	if (error != 0)
 		ft_putstr_fd("Error: ", 2);
 	if (error == 2)
@@ -63,8 +63,7 @@ void	ft_error(t_all *all, int error)
 		ft_putstr_fd("Unclosed map\n", 2);
 	else if (error == 9)
 		ft_putstr_fd("Unclosed map on space\n", 2);
-	else if (error == 10)
-		ft_putstr_fd("Invalid texture\n", 2);
+	ft_putstr_fd(RESET, 2);
 	ft_quit(all);
 }
 

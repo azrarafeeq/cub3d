@@ -101,3 +101,23 @@ void	draw_sprites(t_all *all)
 				size->win_x / 2, all->size->win_y / 2);
 }
 
+void	initdrawing(t_all *all, int x)
+{
+	all->size->camerax = 2 * x / (double)all->size->win_x - 1;
+	all->size->raydirx = all->size->dirx + all
+		->size->planex * all->size->camerax;
+	all->size->raydiry = all->size->diry + all->size
+		->planey * all->size->camerax;
+	all->size->mapx = (int)all->size->posx;
+	all->size->mapy = (int)all->size->posy;
+	if (all->size->raydirx == 0)
+		all->size->deltadistx = 1e30;
+	else
+		all->size->deltadistx = fabs(1 / all->size->raydirx);
+	if (all->size->raydiry == 0)
+		all->size->deltadisty = 1e30;
+	else
+		all->size->deltadisty = fabs(1 / all->size->raydiry);
+	all->size->hit = 0;
+}
+

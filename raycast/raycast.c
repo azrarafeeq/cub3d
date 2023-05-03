@@ -18,7 +18,7 @@ void	mlx_main_loop(t_all *all, char **map)
 	all->mlx->mlx_win = mlx_new_window(all->mlx->mlx, all->\
 	size->win_x, all->size->win_y, "cub3d");
 	initimgs(all);
-	print_plz(all, map);
+	ray_cast(all, map);
 	mlx_hook(all->mlx->mlx_win, 4, (1L << 2), mouse_hook, all);
 	mlx_hook(all->mlx->mlx_win, 5, (1L << 1), mouse_hook, all);
 	mlx_hook(all->mlx->mlx_win, 2, (1L << 0), key, all);
@@ -91,7 +91,7 @@ void	clearbuffer(t_all *all)
 	}
 }
 
-int	print_plz(t_all *all, char **map)
+int	ray_cast(t_all *all, char **map)
 {
 	int	ii;
 	int	x;
@@ -108,7 +108,6 @@ int	print_plz(t_all *all, char **map)
 		getwallhit(all, map);
 		getdrawpos(all, map, &ii);
 		getandfillwalls(all, y, x, ii);
-		y = 0;
 		fill_the_void(all, y, x);
 		x++;
 	}

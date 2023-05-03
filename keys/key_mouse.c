@@ -29,7 +29,7 @@ int	key(int keycode, t_all *all)
 	if (keycode == RIGHT_ARROW || keycode == LEFT_ARROW)
 		key124_123(all, key_code);
 	mlx_clear_window(all->mlx->mlx, all->mlx->mlx_win);
-	print_plz(all, all->map);
+	ray_cast(all, all->map);
 	return (0);
 }
 
@@ -64,12 +64,12 @@ int	mouse_hook(int keycode, int x, int y, t_all *all)
 	if (keycode == 1 && all->flag == 0 && y > 0)
 	{
 		all->flag = 1;
-		print_plz(all, all->map);
+		ray_cast(all, all->map);
 	}
 	else if (y > 0)
 	{
 		all->flag = 0;
-		print_plz(all, all->map);
+		ray_cast(all, all->map);
 	}
 	return (0);
 }

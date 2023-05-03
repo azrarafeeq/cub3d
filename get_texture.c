@@ -20,7 +20,12 @@ void	ft_replace_texture(t_all *all, char *direction, int a)
 	i = 3;
 	tmp = NULL;
 	if (ft_strncmp(all->textures[a], direction, 3))
-		ft_error(all, 10);
+	{
+		ft_putstr_fd(RED, 2);
+		ft_putstr_fd("Invalid texture\n", 2);
+		ft_putstr_fd(RESET, 2);
+		ft_quit(all);
+	}
 	while (all->textures[a][i] == ' ')
 		i++;
 	tmp = ft_substr(all->textures[a], i, ft_strlen(all->textures[a]));
@@ -46,7 +51,12 @@ void	ft_texture(t_all *all)
 	{
 		rd = open(all->textures[i], O_RDONLY);
 		if (rd < 0)
-			ft_error(all, 10);
+		{
+			ft_putstr_fd(RED, 2);
+			ft_putstr_fd("Invalid texture\n", 2);
+			ft_putstr_fd(RESET, 2);
+			ft_quit(all);
+		}
 		close(rd);
 		i++;
 	}

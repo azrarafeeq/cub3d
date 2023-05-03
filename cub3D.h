@@ -57,30 +57,14 @@
 # include "./libft/libft.h"
 # include "./get_next_line/get_next_line.h"
 
-typedef struct s_cub{
-	void		*mlx;
-	void		*win;
-	int			win_width;
-	int			win_length;
-	long int	floor_color;
-	long int	ceil_color;
-	//int		zoom;
-	t_balg		*b_alg;
-	t_image		*i;
-}				t_cub;
-
-// typedef struct s_player
-// {
-// 	float	x;
-// 	float	y;
-// 	float	width;
-// 	float	height;
-// 	int		turn_direction; // -1 for left, +1 for right
-// 	int		walk_direction; // -1 for back, +1 for front
-// 	float	rotation_angle;
-// 	float	walk_speed;
-// 	float	turn_speed;
-// }				t_player;
+// typedef struct s_cub{
+// 	void		*mlx;
+// 	void		*win;
+// 	int			win_width;
+// 	int			win_length;
+// 	long int	floor_color;
+// 	long int	ceil_color;
+// }				t_cub;
 
 // struct Ray {
 //     float rayAngle;
