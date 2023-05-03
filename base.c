@@ -35,17 +35,6 @@ int	ft_checker(char *base)
 	return (0);
 }
 
-int	ft_inbase(char c, char *base)
-{
-	int	i;
-
-	i = 0;
-	while (base[i])
-		if (base[i++] == c)
-			return (0);
-	return (1);
-}
-
 int	ft_lnbr(int nbr, int base_lenght)
 {
 	int	x;
@@ -93,7 +82,7 @@ char	*ft_convert_base(char *nbr, char *base_from, char *base_to)
 	while (nbr[i] && (nbr[i] == '+' || nbr[i] == '-'))
 		if (nbr[i++] == '-')
 			sign++;
-	while (nbr[i] && ft_inbase(nbr[i], base_from) == 0)
+	while (nbr[i] && ft_strchr(base_form, nbr[i]))
 	{
 		j = 0;
 		while (base_from[j])

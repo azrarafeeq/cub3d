@@ -16,9 +16,9 @@ void	key13_1(t_all *all, int keycode)
 {
 	if (keycode == 13)
 	{
-		if (check_wall_collisions_x(all))
+		if (check_wall_collision(all, 'x'))
 		all->size->posx += all->size->dirx * all->size->movespeed;
-		if (check_wall_collisions_y(all))
+		if (check_wall_collisions(all, 'y'))
 			all->size->posy += all->size->diry * all->size->movespeed;
 	}
 	else if (keycode == 1)

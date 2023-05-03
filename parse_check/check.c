@@ -108,7 +108,7 @@ void	ft_check_zero(t_all *all)
 	}
 }
 
-int	check_wall_collisions_y(t_all *all)
+int	check_wall_collision(t_all *all, char c)
 {
 	double	checker;
 	int		flag;
@@ -117,33 +117,18 @@ int	check_wall_collisions_y(t_all *all)
 	checker = 0.1;
 	while (checker <= all->size->movespeed)
 	{
-		if (all->map[(int)
-				(all->size->posx)][(int)
-			(all->size->posy + all->size->diry * checker)] == '1')
-			return (0);
-		checker += 0.1;
-		if (checker > all->size->movespeed && !flag)
+		if (c == y)
 		{
-			checker = all->size->movespeed;
-			flag = 1;
-		}
-	}
-	return (1);
-}
-
-int	check_wall_collisions_x(t_all *all)
-{
-	double	checker;
-	int		flag;
-
-	flag = 0;
-	checker = 0.1;
-	while (checker <= all->size->movespeed)
-	{
-		if (all->map[(int)
-				(all->size->posx + all->size->dirx * all->size->movespeed)]
-			[(int)(all->size->posy)] == '1')
+			if (all->map[(int)(all->size->posx)][(int)
+				(all->size->posy + all->size->diry * checker)] == '1')
 			return (0);
+		}
+		else if (c == x)
+		{
+			if (all->map[(int)(all->size->posx + all->size->dirx
+				* all->size->movespeed)][(int)(all->size->posy)] == '1')
+			return (0);
+		}
 		checker += 0.1;
 		if (checker > all->size->movespeed && !flag)
 		{
