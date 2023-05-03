@@ -12,27 +12,6 @@
 
 #include "cub3d.h"
 
-char	*ft_strdup(const char *str)
-{
-	char	*ret;
-	int		i;
-
-	if (!str)
-		return (NULL);
-	i = ft_strlen(str);
-	ret = (char *)malloc((i + 1) * sizeof(char));
-	if (!ret)
-		return (0);
-	i = 0;
-	while (i < (int)ft_strlen(str) && str[i])
-	{
-		ret[i] = str[i];
-		i++;
-	}
-	ret[i] = 0;
-	return (ret);
-}
-
 size_t	ft_delimiter(char c)
 {
 	if (c == '\n')
