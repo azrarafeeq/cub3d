@@ -16,22 +16,20 @@ int	key(int keycode, t_all *all)
 {
 	if (keycode == ESC)
 		ft_quit(all);
-	if (keycode == W)
-		key13(all);
-	if (keycode == S)
-		key1(all);
-	if (keycode == A)
-		key0(all);
-	if (keycode == D)
-		key2(all);
+	if (keycode == W || keycode == S)
+		key13_1(all, keycode);
+	if (keycode == A || keycode == D)
+		key0_2(all, keycode);
 	if (keycode == UP_ARROW)
-		keyup(all);
+		if (all->size->updown < all->size->win_y)
+			all->size->updown += 7;
 	if (keycode == DOWN_ARROW)
-		keydown(all);
-	if (keycode == RIGHT_ARROW)
-		key124(all);
-	if (keycode == LEFT_ARROW)
-		key123(all);
+		if ((all->size->updown * -1) < all->size->win_y)
+			all->size->updown -= 7;
+	if (keycode == RIGHT_ARROW || keycode == LEFT_ARROW)
+		key124_123(all, key_code);
+	mlx_clear_window(all->mlx->mlx, all->mlx->mlx_win);
+	print_plz(all, all->map);
 	return (0);
 }
 
@@ -42,18 +40,37 @@ int	mouse(int x, int y, t_all *all)
 
 	if (y > yy && (y < all->size->win_y && y > 0) && \
 	(x < all->size->win_x && x > 0))
-		keydown(all);
+		if ((all->size->updown * -1) < all->size->win_y)
+			all->size->updown -= 7;
 	if (y < yy && (y < all->size->win_y && y > 0) && \
 	(x < all->size->win_x && x > 0))
-		keyup(all);
+		if (all->size->updown < all->size->win_y)
+			all->size->updown += 7;
 	if (x > xx && (x < all->size->win_x && x > 0) && \
 	(y < all->size->win_y && y > 0))
-		key124(all);
+		key124_123(all, 124);
 	if (x < xx && x > 0 && (y < all->size->win_y && y > 0) && \
 	(x < all->size->win_x && x > 0))
-		key123(all);
+		key124_123(all, 123);
 	xx = x;
 	yy = y;
+	return (0);
+}
+
+int	mouse_hook(int keycode, int x, int y, t_all *all)
+{
+	(void)x;
+	(void)y;
+	if (keycode == 1 && all->flag == 0 && y > 0)
+	{
+		all->flag = 1;
+		print_plz(all, all->map);
+	}
+	else if (y > 0)
+	{
+		all->flag = 0;
+		print_plz(all, all->map);
+	}
 	return (0);
 }
 

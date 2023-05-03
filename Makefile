@@ -25,13 +25,12 @@
 
 NAME = cub3d
 
-SRCS = cub3d ft_bzero ft_init player_move check get_texture \
+SRCS = ./parse_check/check ./parse_check/parsing_utils\
+./parse_check/parsing cub3d ft_init player_move check get_texture \
 parsing \
 parsing_utils \
 base \
-number_parsing_utils \
 arr_utils \
-basic_utils \
 colors \
 error \
 

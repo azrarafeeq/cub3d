@@ -12,20 +12,6 @@
 
 #include "cub3d.h"
 
-// void	player_init(t_all *all, t_player *player)
-// {
-// 	player->x = 1000 / 2; //for now
-// 	player->y = 800 / 2; // for now
-// 	player->width = 1;
-// 	player->height = 1;
-// 	player->turn_direction = 0;
-// 	player->walk_direction = 0;
-// 	player->rotation_angle = M_PI / 2;
-// 	player->walk_speed = 100;
-// 	player->turn_speed = 45 * (M_PI / 180);
-// 	all->player = player;
-// }
-
 void	all_struct_init(t_all *all, t_cub *cub, t_size *size)
 {
 	ft_bzero(cub, sizeof(t_cub));
@@ -101,23 +87,6 @@ void	extra_imgs(t_all *all)
 		"Imgs/gun.xpm", &all->mlx->w, &all->mlx->h);
 	all->mlx->tex6 = mlx_xpm_file_to_image(all->mlx->mlx, \
 		"Imgs/gunshoot.xpm", &all->mlx->w, &all->mlx->h);
-}
-
-int	mouse_hook(int keycode, int x, int y, t_all *all)
-{
-	(void)x;
-	(void)y;
-	if (keycode == 1 && all->flag == 0 && y > 0)
-	{
-		all->flag = 1;
-		print_plz(all, all->map);
-	}
-	else if (y > 0)
-	{
-		all->flag = 0;
-		print_plz(all, all->map);
-	}
-	return (0);
 }
 
 void	draw_sprites(t_all *all)

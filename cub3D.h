@@ -242,26 +242,7 @@ void	ft_texture(t_all *all);
 
 // parsing end
 
-void	move_player(float deltaTime, t_player *player);
-
-// void	get_map(t_map *map, char *filename);
-// void	map_height(char *filename, t_map *map);
-// void	map_width(char *line, t_map *map);
-// void	read_map(t_map *map, int fd);
-
-// t_balg	*allocate_balg(double *x, double *y, double *x2, double *y2);
-
-// void	bressenham(int x1, int y1, char flag, t_cub **cub, int minusy, int minusx);
-// void	bressenham_part_2(t_balg *b_alg, double *x, double *y);
-// void	initialize_x_y(t_coords *c, int x1, int y1, char flag);
-// int		swap_content(double *int1, double *int2);
-// int		get_sign(double num);
-
-// void	draw(t_cub **cub);
-// void	zoom(t_coords *c, t_cub **cub);
-// void	my_mlx_pixel_put(t_cub **cub, int x, int y, int color);
-
-// void	free_char_array(char **array);
-// void	free_int_array(int **int_array, int size);
+// key
+void	key0_2(t_all *all, int keycode);
 
 #endif
