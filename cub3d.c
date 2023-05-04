@@ -35,10 +35,11 @@ void	ft_read(int fd, t_all *all)
 	all->mapl = mapline;
 }
 
-void	ft_map_checker(t_all *all)
+void	ft_get_map(t_all *all, char *filename)
 {
 	int	fd;
 
+	all->map_file = ft_strdup(argv[1]);
 	ft_map_extension(all);
 	fd = open(all->map_file, O_RDONLY);
 	ft_read(fd, all);
@@ -105,12 +106,9 @@ void	ft_map_extension(t_all *all)
 int	main(int argc, char **argv)
 {
 	t_all		all;
-	t_cub		cub;
+	t_mlx		mlx;
 	t_size		size;
-	t_player	player;
 
-	(void)argc;
-	(void)argv;
 	if (argc != 2)
 	{
 		ft_putstr_fd(RED, 2);
@@ -118,9 +116,14 @@ int	main(int argc, char **argv)
 		ft_putstr_fd(RESET, 2);
 		exit(0);
 	}
-	all_struct_init(&all, &cub, &size);
-	player_init(&all, &player);
-	all.map_file = ft_strdup(argv[1]);
-	ft_map_checker(&all);
-	mlx_main_loop(&all, all.map);
+	all_struct_init(&all, &mlx, &size);
+	ft_get_map(&all, argv[1]);
+	all->mlx->mlx = mlx_init();
+	all->mlx->mlx_win = mlx_new_window(all->mlx->mlx, all->\
+	size->win_x, all->size->win_y, "cub3d");
+	initimgs(&all);
+	ray_cast(&all, map);
+	mlx_hook(all.mlx->mlx_win, 2, 1L << 0, key, all);
+	mlx_hook(all.mlx->mlx_win, 17, 1L << 5, ft_quit, all);
+	mlx_loop(all.mlx->mlx);
 }

@@ -1,31 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   testing.c                                          :+:      :+:    :+:   */
+/*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isaad <isaad@student.42.fr>                +#+  +:+       +#+        */
+/*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/22 20:29:44 by isaad             #+#    #+#             */
-/*   Updated: 2022/11/13 18:15:37 by isaad            ###   ########.fr       */
+/*   Created: 2023/04/07 02:23:16 by arafeeq           #+#    #+#             */
+/*   Updated: 2023/05/02 22:44:02 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "../Includes/cub3d.h"
-
-void	mlx_main_loop(t_all *all, char **map)
-{
-	all->mlx->mlx = mlx_init();
-	all->mlx->mlx_win = mlx_new_window(all->mlx->mlx, all->\
-	size->win_x, all->size->win_y, "cub3d");
-	initimgs(all);
-	ray_cast(all, map);
-	mlx_hook(all->mlx->mlx_win, 4, (1L << 2), mouse_hook, all);
-	mlx_hook(all->mlx->mlx_win, 5, (1L << 1), mouse_hook, all);
-	mlx_hook(all->mlx->mlx_win, 2, (1L << 0), key, all);
-	mlx_hook(all->mlx->mlx_win, 6, 1L << 6, mouse, all);
-	mlx_hook(all->mlx->mlx_win, 17, 1L << 5, ft_quit, all);
-	mlx_loop(all->mlx->mlx);
-}
+#include "cub3d.h"
 
 void	getandfillwalls(t_all *all, int y, int x, int ii)
 {

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isaad <isaad@student.42.fr>                +#+  +:+       +#+        */
+/*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/22 23:34:49 by isaad             #+#    #+#             */
-/*   Updated: 2022/11/13 18:05:30 by isaad            ###   ########.fr       */
+/*   Created: 2023/04/07 02:23:16 by arafeeq           #+#    #+#             */
+/*   Updated: 2023/05/02 22:44:02 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Includes/cub3d.h"
+#include "cub3d.h"
 
 void	drawall(t_all *all, int **buffer)
 {
@@ -37,7 +37,6 @@ void	drawall(t_all *all, int **buffer)
 	}
 	mlx_put_image_to_window(all->mlx->mlx,
 		all->mlx->mlx_win, all->mlx->img, 0, 0);
-	draw_sprites(all);
 	mlx_destroy_image(all->mlx->mlx, all->mlx->img);
 }
 

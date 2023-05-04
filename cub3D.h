@@ -116,39 +116,36 @@ typedef struct s_size
 	double	perpwalldist;
 }			t_size;
 
-// typedef struct s_mlx
-// {
-// 	void		*mlx;
-// 	int			texx;
-// 	int			texy;
-// 	void		*tex;
-// 	int			*text;
-// 	void		*tex2;
-// 	int			*text2;
-// 	void		*tex3;
-// 	int			*text3;
-// 	void		*tex4;
-// 	int			*text4;
-// 	void		*tex5;
-// 	void		*tex6;
-// 	long int	ccolor;
-// 	long int	fcolor;
-// 	int			drawend;
-// 	void		*mlx_win;
-// 	int			**buffer;
-// 	int			drawstart;
-// 	int			lineheight;
-// 	void		*img;
-// 	int			b;
-// 	int			h;
-// 	int			w;
-// }			t_mlx;
+typedef struct s_mlx
+{
+	void		*mlx;
+	int			texx;
+	int			texy;
+	void		*tex;
+	int			*text;
+	void		*tex2;
+	int			*text2;
+	void		*tex3;
+	int			*text3;
+	void		*tex4;
+	int			*text4;
+	long int	ccolor;
+	long int	fcolor;
+	int			drawend;
+	void		*mlx_win;
+	int			**buffer;
+	int			drawstart;
+	int			lineheight;
+	void		*img;
+	int			b;
+	int			h;
+	int			w;
+}			t_mlx;
 
 typedef struct s_all
 {
 	t_size	*size; // struct conains everything related to casting rays
-	t_player *player;
-	//t_mlx	*mlx;
+	t_mlx	*mlx;
 	t_cub	*cub;
 	char	*map_file; // map got from user as argument
 	char	*mapl; // the whole map in one string after reading with read()
@@ -158,7 +155,6 @@ typedef struct s_all
 	char	**map; // stores the map from th esplitted map
 	int		exit; // code to exit
 	int		detector_flag; // flag to detect errors..ets if more than 1
-	//int		flag; --??
 }			t_all;
 
 // parsing
@@ -197,7 +193,6 @@ void	ft_check_walls(t_all *all);
 void	ft_check_space(t_all *all, int i, int a);
 void	ft_check_zero(t_all *all);
 void	ft_player_position(t_all *all);
-void	mlx_main_loop(t_all *all, char **map);
 void	ft_texture(t_all *all);
 
 // parsing end

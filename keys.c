@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keys.c                                             :+:      :+:    :+:   */
+/*   keys.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isaad <isaad@student.42.fr>                +#+  +:+       +#+        */
+/*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/22 20:26:33 by isaad             #+#    #+#             */
-/*   Updated: 2022/11/11 03:48:11 by isaad            ###   ########.fr       */
+/*   Created: 2023/04/07 02:23:16 by arafeeq           #+#    #+#             */
+/*   Updated: 2023/05/02 22:44:02 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Includes/cub3d.h"
+#include "cub3d.h"
 
 void	key13_1(t_all *all, int keycode)
 {
@@ -90,4 +90,44 @@ void	key124_123(t_all *all)
 		all->size->planey = oldplanex * sin(all->size->rotspeed)
 			+ all->size->planey * cos(all->size->rotspeed);
 	}
+}
+
+int	key(int keycode, t_all *all)
+{
+	if (keycode == ESC)
+		ft_quit(all);
+	if (keycode == W || keycode == S)
+		key13_1(all, keycode);
+	if (keycode == A || keycode == D)
+		key0_2(all, keycode);
+	if (keycode == UP_ARROW)
+		if (all->size->updown < all->size->win_y)
+			all->size->updown += 7;
+	if (keycode == DOWN_ARROW)
+		if ((all->size->updown * -1) < all->size->win_y)
+			all->size->updown -= 7;
+	if (keycode == RIGHT_ARROW || keycode == LEFT_ARROW)
+		key124_123(all, key_code);
+	mlx_clear_window(all->mlx->mlx, all->mlx->mlx_win);
+	ray_cast(all, all->map);
+	return (0);
+}
+
+void	editbuffer(t_all *all, int ***buffer)
+{
+	int	i;
+
+	i = 2;
+	while (++i < 13)
+		(*buffer)[all->size->win_y / 2 - i][all->size->win_x / 2] = 0xFF0000;
+	i = 2;
+	while (++i < 13)
+		(*buffer)[all->size->win_y / 2 + i][all->size->win_x / 2] = 0xFF0000;
+	i = 2;
+	while (++i < 13)
+		(*buffer)[all->size->win_y / 2][all->size->win_x / 2 - i] = 0xFF0000;
+	i = 2;
+	while (++i < 13)
+		(*buffer)[all->size->win_y / 2][all->size->win_x / 2 + i] = 0xFF0000;
+	mlx_clear_window(all->mlx->mlx, all->mlx->mlx_win);
 }
