@@ -6,7 +6,7 @@
 /*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 18:24:45 by arafeeq           #+#    #+#             */
-/*   Updated: 2023/05/02 12:35:42 by arafeeq          ###   ########.fr       */
+/*   Updated: 2023/05/05 02:24:39 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dst_size);
 size_t	ft_strlcat(char *dst, const char *src, size_t dst_size);
 size_t	ft_strlen(const char *s);
-size_t	ft_atoi_index(t_all *all, const char *str, size_t i, int error);
 
 t_list	*ft_lstnew(void *content);
 t_list	*ft_lstlast(t_list *lst);

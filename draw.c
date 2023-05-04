@@ -6,7 +6,7 @@
 /*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:23:16 by arafeeq           #+#    #+#             */
-/*   Updated: 2023/05/02 22:44:02 by arafeeq          ###   ########.fr       */
+/*   Updated: 2023/05/05 02:22:41 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,15 @@ void	drawall(t_all *all, int **buffer)
 	j = 0;
 	editbuffer(all, &buffer);
 	all->mlx->img = mlx_new_image(all->mlx->mlx,
-			all->size->win_x, all->size->win_y);
+			WIN_WIDTH, WIN_HEIGHT);
 	texture = (int *)mlx_get_data_addr(all->mlx->img, &all->mlx->b,
 			&all->mlx->w, &all->mlx->h);
-	while (j < all->size->win_y)
+	while (j < WIN_HEIGHT)
 	{
 		i = 0;
-		while (i < all->size->win_x)
+		while (i < WIN_WIDTH)
 		{
-			texture[j * all->size->win_x + i] = buffer[j][i];
+			texture[j * WIN_WIDTH + i] = buffer[j][i];
 			i++;
 		}
 		j++;
@@ -42,7 +42,7 @@ void	drawall(t_all *all, int **buffer)
 
 void	filldown(t_all *all, int y, int x)
 {
-	while (y < all->size->win_y)
+	while (y < WIN_HEIGHT)
 	{
 		if (all->mlx->drawend < 0 || all->mlx->drawend < all->mlx->drawstart)
 			break ;
@@ -63,12 +63,12 @@ void	fill_the_void(t_all *all, int y, int x)
 	y = all->mlx->drawend;
 	filldown(all, y, x);
 	y = 0;
-	while (y < all->size->win_y)
+	while (y < WIN_HEIGHT)
 	{
-		if (all->mlx->buffer[y][x] == 0 && all->size->updown > 0 && \
+		if (all->mlx->buffer[y][x] == 0 && all->ray->updown > 0 && \
 		(y < all->mlx->drawstart || y > all->mlx->drawend))
 			all->mlx->buffer[y][x] = all->mlx->ccolor;
-		if (all->mlx->buffer[y][x] == 0 && all->size->updown < 0 && \
+		if (all->mlx->buffer[y][x] == 0 && all->ray->updown < 0 && \
 		(y < all->mlx->drawstart || y > all->mlx->drawend))
 			all->mlx->buffer[y][x] = all->mlx->fcolor;
 		y++;
@@ -78,15 +78,15 @@ void	fill_the_void(t_all *all, int y, int x)
 void	gettexture(t_all *all, int ii)
 {
 	if (ii == 1)
-		all->size->color = mlx_get_color_value(all->mlx->mlx, all->mlx->text
+		all->ray->color = mlx_get_color_value(all->mlx->mlx, all->mlx->text
 			[(64 * all->mlx->texy) + all->mlx->texx]);
 	else if (ii == 2)
-		all->size->color = mlx_get_color_value(all->mlx->mlx, all->mlx
+		all->ray->color = mlx_get_color_value(all->mlx->mlx, all->mlx
 				->text2[(64 * all->mlx->texy) + all->mlx->texx]);
 	else if (ii == 3)
-		all->size->color = mlx_get_color_value(all->mlx->mlx, all->mlx
+		all->ray->color = mlx_get_color_value(all->mlx->mlx, all->mlx
 				->text3[(64 * all->mlx->texy) + all->mlx->texx]);
 	else if (ii == 4)
-		all->size->color = mlx_get_color_value(all->mlx->mlx, all->mlx
+		all->ray->color = mlx_get_color_value(all->mlx->mlx, all->mlx
 				->text4[(64 * all->mlx->texy) + all->mlx->texx]);
 }

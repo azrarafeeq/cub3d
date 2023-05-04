@@ -6,7 +6,7 @@
 /*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 22:29:08 by arafeeq           #+#    #+#             */
-/*   Updated: 2023/05/02 22:31:09 by arafeeq          ###   ########.fr       */
+/*   Updated: 2023/05/05 02:22:41 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,16 @@
 void	check_pos(char c, t_all *all)
 {
 	if (c == 'N')
-		all->size->where = 0;
+		all->ray->where = 0;
 	if (c == 'E')
-		all->size->where = 1;
+		all->ray->where = 1;
 	if (c == 'S')
-		all->size->where = 2;
+		all->ray->where = 2;
 	if (c == 'W')
-		all->size->where = 3;
+		all->ray->where = 3;
 	if (c == 'N' || c == 'E' || c == 'S' || c == 'W')
 	{
-		direction(all->size);
+		direction(all->ray);
 		all->detector_flag++;
 	}
 	if (all->detector_flag > 1)
@@ -115,24 +115,24 @@ int	check_wall_collision(t_all *all, char c)
 
 	flag = 0;
 	checker = 0.1;
-	while (checker <= all->size->movespeed)
+	while (checker <= all->ray->movespeed)
 	{
-		if (c == y)
+		if (c == 'y')
 		{
-			if (all->map[(int)(all->size->posx)][(int)
-				(all->size->posy + all->size->diry * checker)] == '1')
+			if (all->map[(int)(all->ray->posx)][(int)
+				(all->ray->posy + all->ray->diry * checker)] == '1')
 			return (0);
 		}
-		else if (c == x)
+		else if (c == 'x')
 		{
-			if (all->map[(int)(all->size->posx + all->size->dirx
-				* all->size->movespeed)][(int)(all->size->posy)] == '1')
+			if (all->map[(int)(all->ray->posx + all->ray->dirx
+				* all->ray->movespeed)][(int)(all->ray->posy)] == '1')
 			return (0);
 		}
 		checker += 0.1;
-		if (checker > all->size->movespeed && !flag)
+		if (checker > all->ray->movespeed && !flag)
 		{
-			checker = all->size->movespeed;
+			checker = all->ray->movespeed;
 			flag = 1;
 		}
 	}

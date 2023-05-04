@@ -6,7 +6,7 @@
 /*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 22:34:41 by aalhmoud          #+#    #+#             */
-/*   Updated: 2023/05/02 22:45:52 by arafeeq          ###   ########.fr       */
+/*   Updated: 2023/05/05 02:23:28 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_read(int fd, t_all *all)
 {
 	char	*mapline;
-	char 	*line;
+	char	*line;
 
 	mapline = ft_strdup("");
 	mapline[0] = 0;
@@ -30,7 +30,7 @@ void	ft_read(int fd, t_all *all)
 	while (line)
 	{
 		mapline = ft_strjoin(mapline, line);
-		line = get_next_line(fd); 
+		line = get_next_line(fd);
 	}
 	all->mapl = mapline;
 }
@@ -39,16 +39,16 @@ void	ft_get_map(t_all *all, char *filename)
 {
 	int	fd;
 
-	all->map_file = ft_strdup(argv[1]);
+	all->map_file = ft_strdup(filename);
 	ft_map_extension(all);
 	fd = open(all->map_file, O_RDONLY);
 	ft_read(fd, all);
 	close(fd);
 	all->splmap = ft_split_all(all->mapl, all);
 	ft_config_sort(all);
-	all->textures = ft_arr_dup(all->splmap, 0, 4);
-	all->colors = ft_arr_dup(all->splmap, 4, 2);
-	all->map = ft_arr_dup(all->splmap, 6, ft_arr_len(all->splmap) - 6);
+	all->textures = ft_2d_dup(all->splmap, 0, 4);
+	all->colors = ft_2d_dup(all->splmap, 4, 2);
+	all->map = ft_2d_dup(all->splmap, 6, ft_arr_len(all->splmap) - 6);
 	ft_color_parse(all);
 	ft_map_valid_char(all, -1, 0);
 	if (all->detector_flag == 0)
@@ -84,8 +84,8 @@ void	ft_player_position(t_all *all)
 		if (flag)
 			break ;
 	}
-	all->size->posx = (double)y + 0.5;
-	all->size->posy = (double)x + 0.5;
+	all->ray->posx = (double)y + 0.5;
+	all->ray->posy = (double)x + 0.5;
 }
 
 void	ft_map_extension(t_all *all)
@@ -107,7 +107,7 @@ int	main(int argc, char **argv)
 {
 	t_all		all;
 	t_mlx		mlx;
-	t_size		size;
+	t_ray		size;
 
 	if (argc != 2)
 	{
@@ -118,12 +118,11 @@ int	main(int argc, char **argv)
 	}
 	all_struct_init(&all, &mlx, &size);
 	ft_get_map(&all, argv[1]);
-	all->mlx->mlx = mlx_init();
-	all->mlx->mlx_win = mlx_new_window(all->mlx->mlx, all->\
-	size->win_x, all->size->win_y, "cub3d");
+	all.mlx->mlx = mlx_init();
+	all.mlx->mlx_win = mlx_new_window(all.mlx->mlx, WIN_WIDTH, WIN_HEIGHT, "cub3d");
 	initimgs(&all);
-	ray_cast(&all, map);
-	mlx_hook(all.mlx->mlx_win, 2, 1L << 0, key, all);
-	mlx_hook(all.mlx->mlx_win, 17, 1L << 5, ft_quit, all);
+	ray_cast(&all, all.map);
+	mlx_hook(all.mlx->mlx_win, 2, 1L << 0, key, &all);
+	mlx_hook(all.mlx->mlx_win, 17, 1L << 5, ft_quit, &all);
 	mlx_loop(all.mlx->mlx);
 }

@@ -6,7 +6,7 @@
 /*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 22:34:41 by aalhmoud          #+#    #+#             */
-/*   Updated: 2023/05/02 22:17:22 by arafeeq          ###   ########.fr       */
+/*   Updated: 2023/05/05 02:14:46 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,8 @@ int	ft_quit(t_all *all)
 		mlx_destroy_image(all->mlx->mlx, all->mlx->tex3);
 	if (all->mlx->tex4)
 		mlx_destroy_image(all->mlx->mlx, all->mlx->tex4);
-	if (all->mlx->tex5)
-		mlx_destroy_image(all->mlx->mlx, all->mlx->tex5);
-	if (all->mlx->tex6)
-		mlx_destroy_image(all->mlx->mlx, all->mlx->tex6);
 	if (all->mlx->buffer)
-		while (++i < all->size->win_y)
+		while (++i < WIN_HEIGHT)
 			free(all->mlx->buffer[i]);
 	free(all->mlx->buffer);
 	ft_free_all(all);

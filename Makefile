@@ -6,7 +6,7 @@
 #    By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 02:20:26 by arafeeq           #+#    #+#              #
-#    Updated: 2023/05/02 22:47:07 by arafeeq          ###   ########.fr        #
+#    Updated: 2023/05/05 02:20:18 by arafeeq          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,14 +25,8 @@
 
 NAME = cub3d
 
-SRCS = ./parse_check/check ./parse_check/parsing_utils\
-./parse_check/parsing cub3d ft_init player_move check get_texture \
-parsing \
-parsing_utils \
-base \
-arr_utils \
-colors \
-error \
+SRCS = two_d base check colors cub3d draw drawHelper error ft_init \
+		get_texture keys parsing raycast
 
 GNLSRCS = ./get_next_line/get_next_line.c\
 		./get_next_line/get_next_line_utils.c

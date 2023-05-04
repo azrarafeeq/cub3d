@@ -6,7 +6,7 @@
 /*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 22:34:41 by aalhmoud          #+#    #+#             */
-/*   Updated: 2023/05/02 12:21:03 by arafeeq          ###   ########.fr       */
+/*   Updated: 2023/05/04 23:40:45 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ char	*ft_convert_base(char *nbr, char *base_from, char *base_to)
 	while (nbr[i] && (nbr[i] == '+' || nbr[i] == '-'))
 		if (nbr[i++] == '-')
 			sign++;
-	while (nbr[i] && ft_strchr(base_form, nbr[i]))
+	while (nbr[i] && ft_strchr(base_from, nbr[i]))
 	{
 		j = 0;
 		while (base_from[j])

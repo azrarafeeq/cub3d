@@ -6,7 +6,7 @@
 /*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 22:34:10 by arafeeq           #+#    #+#             */
-/*   Updated: 2023/05/02 22:44:33 by arafeeq          ###   ########.fr       */
+/*   Updated: 2023/05/05 02:02:54 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	ft_config_sort(t_all *all)
 {
 	char	**arr;
 
-	arr = ft_arr_dup(all->splmap, 0, 6);
+	arr = ft_2d_dup(all->splmap, 0, 6);
 	all->splmap[0] = ft_line_replace(all->splmap[0],
 			arr[ft_find_index(all, arr, "NO ", 3)]);
 	all->splmap[1] = ft_line_replace(all->splmap[1],
@@ -90,8 +90,8 @@ void	ft_color_parse(t_all *all)
 	ft_color_chars_checker(all, 2, 0, 0);
 	fc = ft_convert_base(ft_rgb_to_hex(all, all->colors[0], 2), HEX, DEC);
 	cc = ft_convert_base(ft_rgb_to_hex(all, all->colors[1], 2), HEX, DEC);
-	all->cub->floor_color = ft_atoi_index(all, fc, 0, 6);
-	all->cub->ceil_color = ft_atoi_index(all, cc, 0, 6);
+	all->mlx->fcolor = ft_atoi_index(all, fc, 0, 6);
+	all->mlx->ccolor = ft_atoi_index(all, cc, 0, 6);
 	free(fc);
 	free(cc);
 }

@@ -6,7 +6,7 @@
 /*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 18:22:32 by arafeeq           #+#    #+#             */
-/*   Updated: 2022/11/30 14:51:16 by arafeeq          ###   ########.fr       */
+/*   Updated: 2023/05/04 23:51:56 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*read_buffer_size(int fd, char *str)
 	if (!buf)
 		return (NULL);
 	bytes = 1;
-	while (bytes && !ft_strchr(str, '\n'))
+	while (bytes && !ft_strchr_get(str, '\n'))
 	{
 		bytes = read(fd, buf, BUFFER_SIZE);
 		if (bytes == -1)

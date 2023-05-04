@@ -6,7 +6,7 @@
 /*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 18:25:36 by arafeeq           #+#    #+#             */
-/*   Updated: 2022/11/30 15:08:12 by arafeeq          ###   ########.fr       */
+/*   Updated: 2023/05/04 23:51:20 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strchr_get(const char *s, int c)
 {
 	int		i;
 

@@ -6,27 +6,25 @@
 /*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 20:56:52 by arafeeq           #+#    #+#             */
-/*   Updated: 2023/05/02 22:29:52 by arafeeq          ###   ########.fr       */
+/*   Updated: 2023/05/05 02:25:35 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	all_struct_init(t_all *all, t_cub *cub, t_size *size)
+void	all_struct_init(t_all *all, t_mlx *mlx, t_ray *size)
 {
-	ft_bzero(cub, sizeof(t_mlx));
-	ft_bzero(size, sizeof(t_size));
+	ft_bzero(mlx, sizeof(t_mlx));
+	ft_bzero(size, sizeof(t_ray));
 	ft_bzero(all, sizeof(t_all));
 	size->posx = 3;
 	size->posy = 27;
 	direction(size);
-	size->win_x = 960;
-	size->win_y = 540;
 	all->mlx = mlx;
-	all->size = size;
+	all->ray = size;
 }
 
-void	direction(t_size *size)
+void	direction(t_ray *size)
 {
 	where_0(size);
 	if (size->where == 1)
@@ -52,7 +50,7 @@ void	direction(t_size *size)
 	}
 }
 
-void	where_0(t_size *size)
+void	where_0(t_ray *size)
 {
 	if (size->where == 0)
 	{
@@ -77,21 +75,19 @@ void	extra_imgs(t_all *all)
 
 void	initdrawing(t_all *all, int x)
 {
-	all->size->camerax = 2 * x / (double)all->size->win_x - 1;
-	all->size->raydirx = all->size->dirx + all
-		->size->planex * all->size->camerax;
-	all->size->raydiry = all->size->diry + all->size
-		->planey * all->size->camerax;
-	all->size->mapx = (int)all->size->posx;
-	all->size->mapy = (int)all->size->posy;
-	if (all->size->raydirx == 0)
-		all->size->deltadistx = 1e30;
+	all->ray->camerax = 2 * x / (double)WIN_WIDTH - 1;
+	all->ray->raydirx = all->ray->dirx + all->ray->planex * all->ray->camerax;
+	all->ray->raydiry = all->ray->diry + all->ray->planey * all->ray->camerax;
+	all->ray->mapx = (int)all->ray->posx;
+	all->ray->mapy = (int)all->ray->posy;
+	if (all->ray->raydirx == 0)
+		all->ray->deltadistx = 1e30;
 	else
-		all->size->deltadistx = fabs(1 / all->size->raydirx);
-	if (all->size->raydiry == 0)
-		all->size->deltadisty = 1e30;
+		all->ray->deltadistx = fabs(1 / all->ray->raydirx);
+	if (all->ray->raydiry == 0)
+		all->ray->deltadisty = 1e30;
 	else
-		all->size->deltadisty = fabs(1 / all->size->raydiry);
-	all->size->hit = 0;
+		all->ray->deltadisty = fabs(1 / all->ray->raydiry);
+	all->ray->hit = 0;
 }
 

@@ -6,7 +6,7 @@
 /*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 22:34:41 by aalhmoud          #+#    #+#             */
-/*   Updated: 2023/05/02 12:20:44 by arafeeq          ###   ########.fr       */
+/*   Updated: 2023/05/05 02:02:10 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,7 @@ size_t	ft_arr_len(char **arr)
 	return (i);
 }
 
-void	ft_arr_print(char **arr)
-{
-	size_t	i;
-
-	i = 0;
-	if (!arr)
-		return ;
-	while (arr[i])
-	{
-		ft_putstr_fd(arr[i++], 1);
-		ft_putstr_fd("\n", 1);
-	}
-}
-
-char	**ft_arr_dup(char **arr, size_t start, size_t size)
+char	**ft_2d_dup(char **arr, size_t start, size_t size)
 {
 	size_t	i;
 	size_t	j;
