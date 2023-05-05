@@ -6,7 +6,7 @@
 /*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 22:34:10 by arafeeq           #+#    #+#             */
-/*   Updated: 2023/05/05 04:01:46 by arafeeq          ###   ########.fr       */
+/*   Updated: 2023/05/05 04:25:01 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,19 @@ void	ft_texture(t_all *all)
 	}
 }
 
-void	ft_config_sort(t_all *all)
+char	*ft_line_replace(char *old, char *new)
+{
+	if (!new)
+		return (NULL);
+	if (old)
+	{
+		free(old);
+		old = NULL;
+	}
+	return (ft_strdup(new));
+}
+
+void	ft_replace_element(t_all *all)
 {
 	char	**arr;
 

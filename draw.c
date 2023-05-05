@@ -6,7 +6,7 @@
 /*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:23:16 by arafeeq           #+#    #+#             */
-/*   Updated: 2023/05/05 03:55:27 by arafeeq          ###   ########.fr       */
+/*   Updated: 2023/05/05 04:27:40 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,4 +89,30 @@ void	gettexture(t_all *all, int ii)
 	else if (ii == 4)
 		all->ray->color = mlx_get_color_value(all->mlx->mlx, all->mlx
 				->text4[(64 * all->mlx->texy) + all->mlx->texx]);
+}
+
+void	getdrawpos(t_all *all, char **map, int *ii)
+{
+	extracheck(all);
+	if (all->mlx->drawend >= WIN_HEIGHT)
+		all->mlx->drawend = WIN_HEIGHT - 1;
+	if (all->ray->side == 0 && map[(int)all->ray->mapx]
+		[(int)all->ray->mapy] == '1')
+	{
+		all->ray->wallx = all->pl->posy + all
+			->ray->perpwalldist * all->ray->raydiry;
+		if (all->ray->raydirx > 0)
+			*ii = 2;
+		else
+			*ii = 1;
+	}
+	else
+	{
+		all->ray->wallx = all->pl->posx + all
+			->ray->perpwalldist * all->ray->raydirx;
+		if (all->ray->raydiry > 0)
+			*ii = 3;
+		else
+			*ii = 4;
+	}
 }

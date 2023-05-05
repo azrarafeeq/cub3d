@@ -6,7 +6,7 @@
 /*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 22:34:41 by aalhmoud          #+#    #+#             */
-/*   Updated: 2023/05/05 04:01:46 by arafeeq          ###   ########.fr       */
+/*   Updated: 2023/05/05 04:14:41 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,17 @@ void	ft_free_all(t_all *all)
 	ft_free_arr(all->textures);
 	ft_free_arr(all->colors);
 	ft_free_arr(all->map);
+}
+
+void	ft_free_arr(char **arr)
+{
+	size_t	i;
+
+	i = 0;
+	if (!arr)
+		return ;
+	while (arr[i])
+		free(arr[i++]);
+	free(arr[i]);
+	free(arr);
 }

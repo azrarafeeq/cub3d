@@ -6,7 +6,7 @@
 /*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 22:34:41 by aalhmoud          #+#    #+#             */
-/*   Updated: 2023/05/05 04:11:13 by arafeeq          ###   ########.fr       */
+/*   Updated: 2023/05/05 04:25:08 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ft_get_map(t_all *all, char *filename)
 	ft_read(fd, all);
 	close(fd);
 	all->splmap = ft_split_all(all->mapl, all);
-	ft_config_sort(all);
+	ft_replace_element(all);
 	all->textures = ft_2d_dup(all->splmap, 0, 4);
 	all->colors = ft_2d_dup(all->splmap, 4, 2);
 	all->map = ft_2d_dup(all->splmap, 6, ft_arr_len(all->splmap) - 6);

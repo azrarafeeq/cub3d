@@ -6,11 +6,33 @@
 /*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:23:16 by arafeeq           #+#    #+#             */
-/*   Updated: 2023/05/05 03:50:35 by arafeeq          ###   ########.fr       */
+/*   Updated: 2023/05/05 04:48:22 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	getwallhit(t_all *all, char **map)
+{
+	while (all->ray->hit == 0)
+	{
+		if (all->ray->sidedistx < all->ray->sidedisty)
+		{
+			all->ray->sidedistx += all->ray->deltadistx;
+			all->ray->mapx += all->ray->stepx;
+			all->ray->side = 0;
+		}
+		else
+		{
+			all->ray->sidedisty += all->ray->deltadisty;
+			all->ray->mapy += all->ray->stepy;
+			all->ray->side = 1;
+		}
+		if (map[all->ray->mapx][all->ray->mapy] != '0' &&
+				map[all->ray->mapx][all->ray->mapy] != 'P')
+			all->ray->hit = 1;
+	}
+}
 
 void	getandfillwalls(t_all *all, int y, int x, int ii)
 {

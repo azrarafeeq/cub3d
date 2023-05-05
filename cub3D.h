@@ -6,7 +6,7 @@
 /*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:23:16 by arafeeq           #+#    #+#             */
-/*   Updated: 2023/05/05 04:01:46 by arafeeq          ###   ########.fr       */
+/*   Updated: 2023/05/05 04:37:54 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ typedef struct s_all
 
 void	all_struct_init(t_all *all, t_mlx *mlx, t_ray *ray, t_player *player);
 void	direction(t_player *player);
-void	where_0(t_player *player);
+void	direction_0(t_player *player);
 
 // GET MAP
 
@@ -137,7 +137,7 @@ void	ft_get_map(t_all *all, char *filename);
 void	ft_map_extension(t_all *all);
 void	ft_read(int fd, t_all *all);
 char	**ft_split_all(char *str, t_all *all);
-void	ft_config_sort(t_all *all);
+void	ft_replace_element(t_all *all);
 char	**ft_2d_dup(char **arr, size_t start, size_t size);
 size_t	ft_arr_len(char **arr);
 void	ft_color_parse(t_all *all);

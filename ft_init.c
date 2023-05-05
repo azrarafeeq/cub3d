@@ -6,7 +6,7 @@
 /*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 20:56:52 by arafeeq           #+#    #+#             */
-/*   Updated: 2023/05/05 04:10:57 by arafeeq          ###   ########.fr       */
+/*   Updated: 2023/05/05 04:37:37 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,9 @@ void	all_struct_init(t_all *all, t_mlx *mlx, t_ray *ray, t_player *player)
 
 void	direction(t_player *player)
 {
-	where_0(player);
+	direction_0(player);
+	if (player->compass == 1 || player->compass == 3)
+		player->dirx = 0;
 	if (player->compass == 1)
 	{
 		player->dirx = 0;
@@ -52,7 +54,7 @@ void	direction(t_player *player)
 	}
 }
 
-void	where_0(t_player *player)
+void	direction_0(t_player *player)
 {
 	if (player->compass == 0)
 	{
@@ -63,16 +65,32 @@ void	where_0(t_player *player)
 	}
 }
 
-void	extra_imgs(t_all *all)
+void	initdir(t_all *all)
 {
-	all->mlx->tex3 = mlx_xpm_file_to_image(all->mlx
-			->mlx, all->textures[2], &all->mlx->w, &all->mlx->h);
-	all->mlx->text3 = (int *)mlx_get_data_addr(all->mlx->tex3,
-			&all->mlx->b, &all->mlx->h, &all->mlx->w);
-	all->mlx->tex4 = mlx_xpm_file_to_image(all->mlx
-			->mlx, all->textures[3], &all->mlx->w, &all->mlx->h);
-	all->mlx->text4 = (int *)mlx_get_data_addr(all->mlx->tex4,
-			&all->mlx->b, &all->mlx->h, &all->mlx->w);
+	if (all->ray->raydirx < 0)
+	{
+		all->ray->stepx = -1;
+		all->ray->sidedistx = (all->pl->posx - \
+		all->ray->mapx) * all->ray->deltadistx;
+	}
+	else
+	{
+		all->ray->stepx = 1;
+		all->ray->sidedistx = (all->ray->mapx + 1.0 - \
+		all->pl->posx) * all->ray->deltadistx;
+	}
+	if (all->ray->raydiry < 0)
+	{
+		all->ray->stepy = -1;
+		all->ray->sidedisty = (all->pl->posy - \
+		all->ray->mapy) * all->ray->deltadisty;
+	}
+	else
+	{
+		all->ray->stepy = 1;
+		all->ray->sidedisty = (all->ray->mapy + 1.0 - \
+		all->pl->posy) * all->ray->deltadisty;
+	}
 }
 
 void	initdrawing(t_all *all, int x)
