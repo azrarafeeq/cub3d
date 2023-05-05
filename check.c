@@ -6,7 +6,7 @@
 /*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 22:29:08 by arafeeq           #+#    #+#             */
-/*   Updated: 2023/05/05 03:36:59 by arafeeq          ###   ########.fr       */
+/*   Updated: 2023/05/05 22:23:32 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void	check_pos(char c, t_all *all)
 	if (c == 'N' || c == 'E' || c == 'S' || c == 'W')
 	{
 		direction(all->pl);
-		all->detector_flag++;
+		all->compass_flag++;
 	}
-	if (all->detector_flag > 1)
+	if (all->compass_flag > 1)
 		ft_error(all, 5);
 }
 

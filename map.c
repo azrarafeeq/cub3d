@@ -6,7 +6,7 @@
 /*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 06:12:26 by arafeeq           #+#    #+#             */
-/*   Updated: 2023/05/05 06:20:35 by arafeeq          ###   ########.fr       */
+/*   Updated: 2023/05/05 22:23:32 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void	ft_get_map(t_all *all, char *filename)
 	all->map = _2d_array_dup(all->splmap, 6, ft_arr_len(all->splmap) - 6);
 	ft_color_parse(all);
 	ft_map_valid_char(all, -1, 0);
-	if (all->detector_flag == 0)
+	if (all->compass_flag == 0)
 		ft_error(all, 5);
 	ft_check_walls(all);
 	ft_check_space(all, -1, -1);

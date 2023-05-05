@@ -6,7 +6,7 @@
 /*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 22:34:41 by aalhmoud          #+#    #+#             */
-/*   Updated: 2023/05/05 06:22:51 by arafeeq          ###   ########.fr       */
+/*   Updated: 2023/05/06 00:28:37 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ int	ft_find_index(t_all *all, char **arr, char *s, size_t size)
 	int	i;
 
 	i = 0;
+	ft_arr_trim(arr);
 	if (!arr)
 		ft_error(all, 5);
 	while (arr[i] && i < 6)

@@ -6,7 +6,7 @@
 /*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 22:34:10 by arafeeq           #+#    #+#             */
-/*   Updated: 2023/05/05 06:25:47 by arafeeq          ###   ########.fr       */
+/*   Updated: 2023/05/06 00:29:54 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,4 +92,16 @@ void	ft_replace_element(t_all *all)
 	all->splmap[5] = ft_line_replace(all->splmap[5],
 			array[ft_find_index(all, array, "C ", 2)]);
 	ft_free_arr(array);
+}
+
+void	ft_arr_trim(char **arr)
+{
+	int	i;
+
+	i = 0;
+	while (arr[i])
+	{
+		arr[i] = ft_strtrim(arr[i], " ");
+		i++;
+	}
 }

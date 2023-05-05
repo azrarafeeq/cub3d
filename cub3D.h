@@ -6,7 +6,7 @@
 /*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:23:16 by arafeeq           #+#    #+#             */
-/*   Updated: 2023/05/05 21:13:39 by arafeeq          ###   ########.fr       */
+/*   Updated: 2023/05/06 00:29:30 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ typedef struct s_all
 	char		**textures;
 	char		**colors;
 	char		**map;
-	int			detector_flag;
+	int			compass_flag;
 }			t_all;
 
 // INITIALIZE STRUCTS AND PLAYER
@@ -150,6 +150,7 @@ int		check_wall_collision(t_all *all, char c);
 void	check_pos(char c, t_all *all);
 void	ft_texture(t_all *all);
 size_t	ft_wordcount(char *str);
+void	ft_arr_trim(char **arr);
 
 // RAYCAST
 
