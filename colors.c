@@ -6,7 +6,7 @@
 /*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 22:34:41 by aalhmoud          #+#    #+#             */
-/*   Updated: 2023/05/04 23:36:17 by arafeeq          ###   ########.fr       */
+/*   Updated: 2023/05/05 03:28:32 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,21 +105,4 @@ char	*ft_put_nbr(int nbr, char *base, int sign, int i)
 	}
 	ft_putnbr_base(nbr, nbase, num, base);
 	return (num);
-}
-
-size_t	ft_atoi_index(t_all *all, const char *str, size_t i, int error)
-{
-	size_t	nb;
-
-	nb = 0;
-	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n' || str[i] == '\v'
-		|| str[i] == '\f' || str[i] == '\r')
-		i++;
-	while (ft_isdigit(str[i]))
-	{
-		if (nb >= 9223372036854775807)
-			ft_error(all, error);
-		nb = nb * 10 + str[i++] - 48;
-	}
-	return (nb);
 }

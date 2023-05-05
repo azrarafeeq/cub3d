@@ -6,7 +6,7 @@
 /*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 22:34:41 by aalhmoud          #+#    #+#             */
-/*   Updated: 2023/05/05 02:23:28 by arafeeq          ###   ########.fr       */
+/*   Updated: 2023/05/05 04:11:13 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ void	ft_player_position(t_all *all)
 		if (flag)
 			break ;
 	}
-	all->ray->posx = (double)y + 0.5;
-	all->ray->posy = (double)x + 0.5;
+	all->pl->posx = (double)y + 0.5;
+	all->pl->posy = (double)x + 0.5;
 }
 
 void	ft_map_extension(t_all *all)
@@ -107,7 +107,8 @@ int	main(int argc, char **argv)
 {
 	t_all		all;
 	t_mlx		mlx;
-	t_ray		size;
+	t_ray		ray;
+	t_player	player;
 
 	if (argc != 2)
 	{
@@ -116,13 +117,14 @@ int	main(int argc, char **argv)
 		ft_putstr_fd(RESET, 2);
 		exit(0);
 	}
-	all_struct_init(&all, &mlx, &size);
+	all_struct_init(&all, &mlx, &ray, &player);
 	ft_get_map(&all, argv[1]);
 	all.mlx->mlx = mlx_init();
-	all.mlx->mlx_win = mlx_new_window(all.mlx->mlx, WIN_WIDTH, WIN_HEIGHT, "cub3d");
+	all.mlx->mlx_win = mlx_new_window(all.mlx->mlx,
+			WIN_WIDTH, WIN_HEIGHT, "cub3d");
 	initimgs(&all);
 	ray_cast(&all, all.map);
 	mlx_hook(all.mlx->mlx_win, 2, 1L << 0, key, &all);
-	mlx_hook(all.mlx->mlx_win, 17, 1L << 5, ft_quit, &all);
+	mlx_hook(all.mlx->mlx_win, 17, 1L << 5, ft_destroy_free, &all);
 	mlx_loop(all.mlx->mlx);
 }

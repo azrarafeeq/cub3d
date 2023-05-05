@@ -6,7 +6,7 @@
 /*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 22:34:41 by aalhmoud          #+#    #+#             */
-/*   Updated: 2023/05/02 22:31:05 by arafeeq          ###   ########.fr       */
+/*   Updated: 2023/05/05 04:10:44 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,4 +111,3 @@ int	ft_find_index(t_all *all, char **arr, char *s, size_t size)
 	ft_error(all, 5);
 	return (i);
 }
-

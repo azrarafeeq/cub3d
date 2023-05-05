@@ -6,7 +6,7 @@
 /*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 22:29:08 by arafeeq           #+#    #+#             */
-/*   Updated: 2023/05/05 02:22:41 by arafeeq          ###   ########.fr       */
+/*   Updated: 2023/05/05 03:36:59 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,20 @@
 void	check_pos(char c, t_all *all)
 {
 	if (c == 'N')
-		all->ray->where = 0;
+		all->pl->compass = 0;
 	if (c == 'E')
-		all->ray->where = 1;
+		all->pl->compass = 1;
 	if (c == 'S')
-		all->ray->where = 2;
+		all->pl->compass = 2;
 	if (c == 'W')
-		all->ray->where = 3;
+		all->pl->compass = 3;
 	if (c == 'N' || c == 'E' || c == 'S' || c == 'W')
 	{
-		direction(all->ray);
+		direction(all->pl);
 		all->detector_flag++;
 	}
 	if (all->detector_flag > 1)
 		ft_error(all, 5);
-
 }
 
 void	ft_check_walls(t_all *all)
@@ -115,24 +114,22 @@ int	check_wall_collision(t_all *all, char c)
 
 	flag = 0;
 	checker = 0.1;
-	while (checker <= all->ray->movespeed)
+	while (checker <= all->pl->movespeed)
 	{
 		if (c == 'y')
 		{
-			if (all->map[(int)(all->ray->posx)][(int)
-				(all->ray->posy + all->ray->diry * checker)] == '1')
-			return (0);
+			if (all->map[(int)(all->pl->posx)][(int)
+				(all->pl->posy + all->pl->diry * checker)] == '1')
+				return (0);
 		}
 		else if (c == 'x')
-		{
-			if (all->map[(int)(all->ray->posx + all->ray->dirx
-				* all->ray->movespeed)][(int)(all->ray->posy)] == '1')
-			return (0);
-		}
+			if (all->map[(int)(all->pl->posx + all->pl->dirx
+					* all->pl->movespeed)][(int)(all->pl->posy)] == '1')
+				return (0);
 		checker += 0.1;
-		if (checker > all->ray->movespeed && !flag)
+		if (checker > all->pl->movespeed && !flag)
 		{
-			checker = all->ray->movespeed;
+			checker = all->pl->movespeed;
 			flag = 1;
 		}
 	}

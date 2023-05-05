@@ -6,34 +6,34 @@
 /*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 22:34:41 by aalhmoud          #+#    #+#             */
-/*   Updated: 2023/05/04 23:40:45 by arafeeq          ###   ########.fr       */
+/*   Updated: 2023/05/05 03:28:43 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-// int	ft_checker(char *base)
-// {
-// 	int	i;
-// 	int	j;
+int	ft_checker(char *base)
+{
+	int	i;
+	int	j;
 
-// 	i = 0;
-// 	if (ft_strlen(base) < 2)
-// 		return (1);
-// 	while (base[i])
-// 	{
-// 		j = 0;
-// 		while (base[j])
-// 			if (base[i] == base[j++] && i != j - 1)
-// 				return (2);
-// 		if (base[i] == '+' || base[i] == '-' || base[i] == ' '
-// 			|| base[i] == '\f' || base[i] == '\n' || base[i] == '\t'
-// 			|| base[i] == '\v')
-// 			return (3);
-// 		i++;
-// 	}
-// 	return (0);
-// }
+	i = 0;
+	if (ft_strlen(base) < 2)
+		return (1);
+	while (base[i])
+	{
+		j = 0;
+		while (base[j])
+			if (base[i] == base[j++] && i != j - 1)
+				return (2);
+		if (base[i] == '+' || base[i] == '-' || base[i] == ' '
+			|| base[i] == '\f' || base[i] == '\n' || base[i] == '\t'
+			|| base[i] == '\v')
+			return (3);
+		i++;
+	}
+	return (0);
+}
 
 int	ft_lnbr(int nbr, int base_lenght)
 {
@@ -74,8 +74,8 @@ char	*ft_convert_base(char *nbr, char *base_from, char *base_to)
 	i = 0;
 	fnb = 0;
 	sign = 0;
-	// if (ft_checker(base_from) != 0 || ft_checker(base_to))
-	// 	return (0);
+	if (ft_checker(base_from) != 0 || ft_checker(base_to))
+		return (0);
 	while (nbr[i] && (nbr[i] == ' ' || nbr[i] == '\f'
 			|| nbr[i] == '\n' || nbr[i] == '\t' || nbr[i] == '\v'))
 		i++;
@@ -91,4 +91,21 @@ char	*ft_convert_base(char *nbr, char *base_from, char *base_to)
 		i++;
 	}
 	return (ft_put_nbr(fnb, base_to, sign, -1));
+}
+
+size_t	ft_atoi_index(t_all *all, const char *str, size_t i, int error)
+{
+	size_t	nb;
+
+	nb = 0;
+	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n' || str[i] == '\v'
+		|| str[i] == '\f' || str[i] == '\r')
+		i++;
+	while (ft_isdigit(str[i]))
+	{
+		if (nb >= 9223372036854775807)
+			ft_error(all, error);
+		nb = nb * 10 + str[i++] - 48;
+	}
+	return (nb);
 }

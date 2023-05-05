@@ -6,7 +6,7 @@
 /*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 22:34:10 by arafeeq           #+#    #+#             */
-/*   Updated: 2023/05/05 02:02:54 by arafeeq          ###   ########.fr       */
+/*   Updated: 2023/05/05 04:01:46 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_replace_texture(t_all *all, char *direction, int a)
 		ft_putstr_fd(RED, 2);
 		ft_putstr_fd("Invalid texture\n", 2);
 		ft_putstr_fd(RESET, 2);
-		ft_quit(all);
+		ft_destroy_free(all);
 	}
 	while (all->textures[a][i] == ' ')
 		i++;
@@ -55,7 +55,7 @@ void	ft_texture(t_all *all)
 			ft_putstr_fd(RED, 2);
 			ft_putstr_fd("Invalid texture\n", 2);
 			ft_putstr_fd(RESET, 2);
-			ft_quit(all);
+			ft_destroy_free(all);
 		}
 		close(rd);
 		i++;

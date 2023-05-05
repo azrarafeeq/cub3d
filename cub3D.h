@@ -6,7 +6,7 @@
 /*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:23:16 by arafeeq           #+#    #+#             */
-/*   Updated: 2023/05/05 02:32:49 by arafeeq          ###   ########.fr       */
+/*   Updated: 2023/05/05 04:01:46 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,18 @@
 # include "./libft/libft.h"
 # include "./get_next_line/get_next_line.h"
 
-// typedef struct s_player
-// {
-// 	int	pos;
-// }				t_ray;
+typedef struct s_player
+{
+	int		compass;
+	double	dirx;
+	double	diry;
+	double	posx;
+	double	posy;
+	double	plnx;
+	double	plny;
+	double	rt_s;
+	double	movespeed;
+}				t_player;
 
 typedef struct s_ray
 {
@@ -57,26 +65,17 @@ typedef struct s_ray
 	int		side;
 	int		mapx;
 	int		mapy;
-	double	dirx;
-	double	diry;
-	double	posx;
-	double	posy;
 	double	step;
 	double	wallx;
-	int		where;
 	int		stepx;
 	int		stepy;
 	int		color;
-	double	planex;
-	double	planey;
 	double	texpos;
 	int		updown;
 	int		drawend;
 	double	camerax;
 	double	raydirx;
 	double	raydiry;
-	double	rotspeed;
-	double	movespeed;
 	int		drawstart;
 	double	sidedistx;
 	double	sidedisty;
@@ -114,23 +113,23 @@ typedef struct s_mlx
 
 typedef struct s_all
 {
-	t_ray	*ray; // struct conains everything related to casting rays
-	t_mlx	*mlx;
-	char	*map_file; // map got from user as argument
-	char	*mapl; // the whole map in one string after reading with read()
-	char	**splmap; // mapl splitted with "\n"
-	char	**textures; // stores the texture from the splitted map
-	char	**colors; // stores the colours from the splitted map
-	char	**map; // stores the map from th esplitted map
-	int		exit; // code to exit
-	int		detector_flag; // flag to detect errors..exits if more than 1
+	t_player	*pl;
+	t_ray		*ray;
+	t_mlx		*mlx;
+	char		*map_file;
+	char		*mapl;
+	char		**splmap;
+	char		**textures;
+	char		**colors;
+	char		**map;
+	int			detector_flag;
 }			t_all;
 
 // INITIALIZE STRUCT
 
-void	all_struct_init(t_all *all, t_mlx *mlx, t_ray *size);
-void	direction(t_ray *size);
-void	where_0(t_ray *size);
+void	all_struct_init(t_all *all, t_mlx *mlx, t_ray *ray, t_player *player);
+void	direction(t_player *player);
+void	where_0(t_player *player);
 
 // GET MAP
 
@@ -173,7 +172,7 @@ void	key0_2(t_all *all, int keycode);
 void	key124_123(t_all *all, int keycode);
 int		key(int keycode, t_all *all);
 void	editbuffer(t_all *all, int ***buffer);
-int		ft_quit(t_all *all);
+int		ft_destroy_free(t_all *all);
 
 // COLOURS
 
@@ -192,7 +191,7 @@ char	*ft_convert_base(char *nbr, char *base_from, char *base_to);
 
 // ERROR
 
-int		ft_quit(t_all *all);
+int		ft_destroy_free(t_all *all);
 void	ft_error(t_all *all, int error);
 void	ft_free_all(t_all *all);
 void	ft_free_arr(char **arr);

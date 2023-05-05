@@ -6,7 +6,7 @@
 /*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:23:16 by arafeeq           #+#    #+#             */
-/*   Updated: 2023/05/05 02:22:41 by arafeeq          ###   ########.fr       */
+/*   Updated: 2023/05/05 04:01:46 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,18 @@ void	key13_1(t_all *all, int keycode)
 	if (keycode == 13)
 	{
 		if (check_wall_collision(all, 'x'))
-		all->ray->posx += all->ray->dirx * all->ray->movespeed;
+			all->pl->posx += all->pl->dirx * all->pl->movespeed;
 		if (check_wall_collision(all, 'y'))
-			all->ray->posy += all->ray->diry * all->ray->movespeed;
+			all->pl->posy += all->pl->diry * all->pl->movespeed;
 	}
 	else if (keycode == 1)
 	{
-		if (all->map[(int)(all->ray->posx - all->ray->dirx
-			* all->ray->movespeed)][(int)(all->ray->posy)] != '1')
-				all->ray->posx -= all->ray->dirx * all->ray->movespeed;
-		if (all->map[(int)(all->ray->posx)]
-			[(int)(all->ray->posy - all->ray->diry
-				* all->ray->movespeed)] != '1')
-				all->ray->posy -= all->ray->diry * all->ray->movespeed;
+		if (all->map[(int)(all->pl->posx - all->pl->dirx
+				* all->pl->movespeed)][(int)(all->pl->posy)] != '1')
+			all->pl->posx -= all->pl->dirx * all->pl->movespeed;
+		if (all->map[(int)(all->pl->posx)][(int)(all->pl->posy
+			- all->pl->diry * all->pl->movespeed)] != '1')
+			all->pl->posy -= all->pl->diry * all->pl->movespeed;
 	}
 }
 
@@ -37,64 +36,57 @@ void	key0_2(t_all *all, int keycode)
 {
 	if (keycode == A)
 	{
-		if (all->map[(int)
-			(all->ray->posx - all->ray->diry * all->ray->movespeed)]
-		[(int)(all->ray->posy)] != '1')
-		all->ray->posx -= all->ray->diry * all->ray->movespeed;
-		if (all->map[(int)(all->ray->posx)]
-			[(int)(all->ray->posy
-				+ all->ray->dirx * all->ray->movespeed)] != '1')
-				all->ray->posy += all->ray->dirx * all->ray->movespeed;
+		if (all->map[(int)(all->pl->posx - all->pl->diry
+				* all->pl->movespeed)][(int)(all->pl->posy)] != '1')
+			all->pl->posx -= all->pl->diry * all->pl->movespeed;
+		if (all->map[(int)(all->pl->posx)][(int)(all->pl->posy
+				+ all->pl->dirx * all->pl->movespeed)] != '1')
+			all->pl->posy += all->pl->dirx * all->pl->movespeed;
 	}
 	else if (keycode == D)
 	{
-		if (all->map[(int)(all->ray->posx + all->ray->diry
-			* all->ray->movespeed)][(int)(all->ray->posy)] != '1')
-				all->ray->posx += all->ray->diry * all->ray->movespeed;
-		if (all->map[(int)(all->ray->posx)]
-			[(int)(all->ray->posy - all->ray->dirx
-				* all->ray->movespeed)] != '1')
-				all->ray->posy -= all->ray->dirx * all->ray->movespeed;
+		if (all->map[(int)(all->pl->posx + all->pl->diry
+				* all->pl->movespeed)][(int)(all->pl->posy)] != '1')
+			all->pl->posx += all->pl->diry * all->pl->movespeed;
+		if (all->map[(int)(all->pl->posx)][(int)(all->pl->posy
+				- all->pl->dirx * all->pl->movespeed)] != '1')
+			all->pl->posy -= all->pl->dirx * all->pl->movespeed;
 	}
 }
 
-void	key124_123(t_all *all, int keycode)
+void	key124_123(t_all *a, int keycode)
 {
-	double	olddirx;
-	double	oldplanex;
+	double	odx;
+	double	opx;
 
 	if (keycode == 124)
 	{
-		olddirx = all->ray->dirx;
-		oldplanex = all->ray->planex;
-		all->ray->dirx = all->ray->dirx * cos(-all->ray->rotspeed) - \
-		all->ray->diry * sin(-all->ray->rotspeed);
-		all->ray->diry = olddirx * sin(-all->ray->rotspeed)
-			+ all->ray->diry * cos(-all->ray->rotspeed);
-		all->ray->planex = all->ray->planex * cos(-all->ray->rotspeed) - \
-		all->ray->planey * sin(-all->ray->rotspeed);
-		all->ray->planey = oldplanex * sin(-all->ray->rotspeed) + \
-		all->ray->planey * cos(-all->ray->rotspeed);
+		odx = a->pl->dirx;
+		opx = a->pl->plnx;
+		a->pl->dirx = a->pl->dirx * cos(-a->pl->rt_s)
+			- a->pl->diry * sin(-a->pl->rt_s);
+		a->pl->diry = odx * sin(-a->pl->rt_s) + a->pl->diry * cos(-a->pl->rt_s);
+		a->pl->plnx = a->pl->plnx * cos(-a->pl->rt_s)
+			- a->pl->plny * sin(-a->pl->rt_s);
+		a->pl->plny = opx * sin(-a->pl->rt_s) + a->pl->plny * cos(-a->pl->rt_s);
 	}
 	else if (keycode == 123)
 	{
-		olddirx = all->ray->dirx;
-		oldplanex = all->ray->planex;
-		all->ray->dirx = all->ray->dirx * cos(all->ray->rotspeed) - \
-		all->ray->diry * sin(all->ray->rotspeed);
-		all->ray->diry = olddirx * sin(all->ray->rotspeed)
-			+ all->ray->diry * cos(all->ray->rotspeed);
-		all->ray->planex = all->ray->planex * cos(all->ray->rotspeed)
-			- all->ray->planey * sin(all->ray->rotspeed);
-		all->ray->planey = oldplanex * sin(all->ray->rotspeed)
-			+ all->ray->planey * cos(all->ray->rotspeed);
+		odx = a->pl->dirx;
+		opx = a->pl->plnx;
+		a->pl->dirx = a->pl->dirx * cos(a->pl->rt_s)
+			- a->pl->diry * sin(a->pl->rt_s);
+		a->pl->diry = odx * sin(a->pl->rt_s) + a->pl->diry * cos(a->pl->rt_s);
+		a->pl->plnx = a->pl->plnx * cos(a->pl->rt_s)
+			- a->pl->plny * sin(a->pl->rt_s);
+		a->pl->plny = opx * sin(a->pl->rt_s) + a->pl->plny * cos(a->pl->rt_s);
 	}
 }
 
 int	key(int keycode, t_all *all)
 {
 	if (keycode == ESC)
-		ft_quit(all);
+		ft_destroy_free(all);
 	if (keycode == W || keycode == S)
 		key13_1(all, keycode);
 	if (keycode == A || keycode == D)

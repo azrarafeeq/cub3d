@@ -6,7 +6,7 @@
 #    By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 02:20:26 by arafeeq           #+#    #+#              #
-#    Updated: 2023/05/05 02:20:18 by arafeeq          ###   ########.fr        #
+#    Updated: 2023/05/05 04:09:07 by arafeeq          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@
 
 NAME = cub3d
 
-SRCS = two_d base check colors cub3d draw drawHelper error ft_init \
+SRCS = utils base check colors cub3d draw draw2 error ft_init \
 		get_texture keys parsing raycast
 
 GNLSRCS = ./get_next_line/get_next_line.c\

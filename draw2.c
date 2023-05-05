@@ -6,7 +6,7 @@
 /*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:23:16 by arafeeq           #+#    #+#             */
-/*   Updated: 2023/05/05 02:25:11 by arafeeq          ###   ########.fr       */
+/*   Updated: 2023/05/05 04:03:43 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,26 +17,26 @@ void	initdir(t_all *all)
 	if (all->ray->raydirx < 0)
 	{
 		all->ray->stepx = -1;
-		all->ray->sidedistx = (all->ray->posx - \
+		all->ray->sidedistx = (all->pl->posx - \
 		all->ray->mapx) * all->ray->deltadistx;
 	}
 	else
 	{
 		all->ray->stepx = 1;
 		all->ray->sidedistx = (all->ray->mapx + 1.0 - \
-		all->ray->posx) * all->ray->deltadistx;
+		all->pl->posx) * all->ray->deltadistx;
 	}
 	if (all->ray->raydiry < 0)
 	{
 		all->ray->stepy = -1;
-		all->ray->sidedisty = (all->ray->posy - \
+		all->ray->sidedisty = (all->pl->posy - \
 		all->ray->mapy) * all->ray->deltadisty;
 	}
 	else
 	{
 		all->ray->stepy = 1;
 		all->ray->sidedisty = (all->ray->mapy + 1.0 - \
-		all->ray->posy) * all->ray->deltadisty;
+		all->pl->posy) * all->ray->deltadisty;
 	}
 }
 
@@ -87,7 +87,7 @@ void	getdrawpos(t_all *all, char **map, int *ii)
 	if (all->ray->side == 0 && map[(int)all->ray->mapx]
 		[(int)all->ray->mapy] == '1')
 	{
-		all->ray->wallx = all->ray->posy + all
+		all->ray->wallx = all->pl->posy + all
 			->ray->perpwalldist * all->ray->raydiry;
 		if (all->ray->raydirx > 0)
 			*ii = 2;
@@ -96,7 +96,7 @@ void	getdrawpos(t_all *all, char **map, int *ii)
 	}
 	else
 	{
-		all->ray->wallx = all->ray->posx + all
+		all->ray->wallx = all->pl->posx + all
 			->ray->perpwalldist * all->ray->raydirx;
 		if (all->ray->raydiry > 0)
 			*ii = 3;

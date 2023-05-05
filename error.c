@@ -6,19 +6,17 @@
 /*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 22:34:41 by aalhmoud          #+#    #+#             */
-/*   Updated: 2023/05/05 02:14:46 by arafeeq          ###   ########.fr       */
+/*   Updated: 2023/05/05 04:01:46 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	ft_quit(t_all *all)
+int	ft_destroy_free(t_all *all)
 {
 	int	i;
-	int	excode;
 
 	i = -1;
-	excode = all->exit;
 	if (all->mlx->mlx_win)
 		mlx_destroy_window(all->mlx->mlx, all->mlx->mlx_win);
 	if (all->mlx->tex)
@@ -34,12 +32,11 @@ int	ft_quit(t_all *all)
 			free(all->mlx->buffer[i]);
 	free(all->mlx->buffer);
 	ft_free_all(all);
-	exit(excode);
+	exit(0);
 }
 
 void	ft_error(t_all *all, int error)
 {
-	all->exit = error;
 	ft_putstr_fd(RED, 2);
 	if (error != 0)
 		ft_putstr_fd("Error: ", 2);
@@ -60,7 +57,7 @@ void	ft_error(t_all *all, int error)
 	else if (error == 9)
 		ft_putstr_fd("Unclosed map on space\n", 2);
 	ft_putstr_fd(RESET, 2);
-	ft_quit(all);
+	ft_destroy_free(all);
 }
 
 void	ft_free_all(t_all *all)

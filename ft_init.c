@@ -6,58 +6,60 @@
 /*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 20:56:52 by arafeeq           #+#    #+#             */
-/*   Updated: 2023/05/05 02:25:35 by arafeeq          ###   ########.fr       */
+/*   Updated: 2023/05/05 04:10:57 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	all_struct_init(t_all *all, t_mlx *mlx, t_ray *size)
+void	all_struct_init(t_all *all, t_mlx *mlx, t_ray *ray, t_player *player)
 {
 	ft_bzero(mlx, sizeof(t_mlx));
-	ft_bzero(size, sizeof(t_ray));
+	ft_bzero(ray, sizeof(t_ray));
+	ft_bzero(all, sizeof(t_player));
 	ft_bzero(all, sizeof(t_all));
-	size->posx = 3;
-	size->posy = 27;
-	direction(size);
+	player->posx = 3;
+	player->posy = 27;
+	all->pl = player;
+	direction(player);
 	all->mlx = mlx;
-	all->ray = size;
+	all->ray = ray;
 }
 
-void	direction(t_ray *size)
+void	direction(t_player *player)
 {
-	where_0(size);
-	if (size->where == 1)
+	where_0(player);
+	if (player->compass == 1)
 	{
-		size->dirx = 0;
-		size->diry = 1;
-		size->planex = 0.66;
-		size->planey = 0;
+		player->dirx = 0;
+		player->diry = 1;
+		player->plnx = 0.66;
+		player->plny = 0;
 	}
-	else if (size->where == 2)
+	else if (player->compass == 2)
 	{
-		size->dirx = 1;
-		size->diry = 0;
-		size->planex = 0;
-		size->planey = -0.66;
+		player->dirx = 1;
+		player->diry = 0;
+		player->plnx = 0;
+		player->plny = -0.66;
 	}
-	else if (size->where == 3)
+	else if (player->compass == 3)
 	{
-		size->dirx = 0;
-		size->diry = -1;
-		size->planex = -0.66;
-		size->planey = 0;
+		player->dirx = 0;
+		player->diry = -1;
+		player->plnx = -0.66;
+		player->plny = 0;
 	}
 }
 
-void	where_0(t_ray *size)
+void	where_0(t_player *player)
 {
-	if (size->where == 0)
+	if (player->compass == 0)
 	{
-		size->dirx = -1;
-		size->diry = 0;
-		size->planex = 0;
-		size->planey = 0.66;
+		player->dirx = -1;
+		player->diry = 0;
+		player->plnx = 0;
+		player->plny = 0.66;
 	}
 }
 
@@ -76,10 +78,10 @@ void	extra_imgs(t_all *all)
 void	initdrawing(t_all *all, int x)
 {
 	all->ray->camerax = 2 * x / (double)WIN_WIDTH - 1;
-	all->ray->raydirx = all->ray->dirx + all->ray->planex * all->ray->camerax;
-	all->ray->raydiry = all->ray->diry + all->ray->planey * all->ray->camerax;
-	all->ray->mapx = (int)all->ray->posx;
-	all->ray->mapy = (int)all->ray->posy;
+	all->ray->raydirx = all->pl->dirx + all->pl->plnx * all->ray->camerax;
+	all->ray->raydiry = all->pl->diry + all->pl->plny * all->ray->camerax;
+	all->ray->mapx = (int)all->pl->posx;
+	all->ray->mapy = (int)all->pl->posy;
 	if (all->ray->raydirx == 0)
 		all->ray->deltadistx = 1e30;
 	else
@@ -90,4 +92,3 @@ void	initdrawing(t_all *all, int x)
 		all->ray->deltadisty = fabs(1 / all->ray->raydiry);
 	all->ray->hit = 0;
 }
-

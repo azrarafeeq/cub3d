@@ -6,7 +6,7 @@
 /*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:23:16 by arafeeq           #+#    #+#             */
-/*   Updated: 2023/05/05 02:22:41 by arafeeq          ###   ########.fr       */
+/*   Updated: 2023/05/05 03:50:35 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int	ray_cast(t_all *all, char **map)
 		x++;
 	}
 	drawall(all, all->mlx->buffer);
-	all->ray->movespeed = 0.12;
-	all->ray->rotspeed = 0.055;
+	all->pl->movespeed = 0.12;
+	all->pl->rt_s = 0.055;
 	return (0);
 }
