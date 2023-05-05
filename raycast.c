@@ -6,26 +6,26 @@
 /*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:23:16 by arafeeq           #+#    #+#             */
-/*   Updated: 2023/05/05 04:48:22 by arafeeq          ###   ########.fr       */
+/*   Updated: 2023/05/05 21:13:58 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	getwallhit(t_all *all, char **map)
+void	get_wall_hit(t_all *all, char **map)
 {
 	while (all->ray->hit == 0)
 	{
 		if (all->ray->sidedistx < all->ray->sidedisty)
 		{
 			all->ray->sidedistx += all->ray->deltadistx;
-			all->ray->mapx += all->ray->stepx;
+			all->ray->mapx += all->pl->stepx;
 			all->ray->side = 0;
 		}
 		else
 		{
 			all->ray->sidedisty += all->ray->deltadisty;
-			all->ray->mapy += all->ray->stepy;
+			all->ray->mapy += all->pl->stepy;
 			all->ray->side = 1;
 		}
 		if (map[all->ray->mapx][all->ray->mapy] != '0' &&
@@ -34,7 +34,7 @@ void	getwallhit(t_all *all, char **map)
 	}
 }
 
-void	getandfillwalls(t_all *all, int y, int x, int ii)
+void	get_walls(t_all *all, int y, int x, int ii)
 {
 	all->ray->wallx = (double)all->ray->wallx - (int)all->ray->wallx;
 	all->mlx->texx = (int)(all->ray->wallx * (double)64);
@@ -112,10 +112,10 @@ int	ray_cast(t_all *all, char **map)
 	{
 		initdrawing(all, x);
 		initdir(all);
-		getwallhit(all, map);
-		getdrawpos(all, map, &ii);
-		getandfillwalls(all, y, x, ii);
-		fill_the_void(all, y, x);
+		get_wall_hit(all, map);
+		get_player_pos(all, map, &ii);
+		get_walls(all, y, x, ii);
+		get_floor_ceil(all, y, x);
 		x++;
 	}
 	drawall(all, all->mlx->buffer);

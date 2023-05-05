@@ -6,7 +6,7 @@
 /*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 22:34:41 by aalhmoud          #+#    #+#             */
-/*   Updated: 2023/05/05 04:10:44 by arafeeq          ###   ########.fr       */
+/*   Updated: 2023/05/05 06:22:51 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,23 +47,18 @@ void	ft_map_valid_char(t_all *all, int i, size_t nl)
 	}
 }
 
-size_t	ft_wordcount(char *str)
+void	ft_color_parse(t_all *all)
 {
-	size_t	nb;
-	size_t	i;
+	char	*fc;
+	char	*cc;
 
-	nb = 0;
-	i = 0;
-	while (str[i])
-	{
-		while (str[i] && str[i] == '\n')
-			i++;
-		if (str[i] && str[i] != '\n')
-			nb++;
-		while (str[i] && str[i] != '\n')
-			i++;
-	}
-	return (nb);
+	ft_color_chars_checker(all, 2, 0, 0);
+	fc = ft_convert_base(ft_rgb_to_hex(all, all->colors[0], 2), HEX, DEC);
+	cc = ft_convert_base(ft_rgb_to_hex(all, all->colors[1], 2), HEX, DEC);
+	all->mlx->fcolor = ft_atoi_index(all, fc, 0, 6);
+	all->mlx->ccolor = ft_atoi_index(all, cc, 0, 6);
+	free(fc);
+	free(cc);
 }
 
 char	**ft_split_all(char *str, t_all *all)

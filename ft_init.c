@@ -6,7 +6,7 @@
 /*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 20:56:52 by arafeeq           #+#    #+#             */
-/*   Updated: 2023/05/05 04:37:37 by arafeeq          ###   ########.fr       */
+/*   Updated: 2023/05/05 19:38:06 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	all_struct_init(t_all *all, t_mlx *mlx, t_ray *ray, t_player *player)
 
 void	direction(t_player *player)
 {
-	direction_0(player);
+	direction_part_1(player);
 	if (player->compass == 1 || player->compass == 3)
 		player->dirx = 0;
 	if (player->compass == 1)
@@ -54,7 +54,7 @@ void	direction(t_player *player)
 	}
 }
 
-void	direction_0(t_player *player)
+void	direction_part_1(t_player *player)
 {
 	if (player->compass == 0)
 	{
@@ -69,25 +69,25 @@ void	initdir(t_all *all)
 {
 	if (all->ray->raydirx < 0)
 	{
-		all->ray->stepx = -1;
+		all->pl->stepx = -1;
 		all->ray->sidedistx = (all->pl->posx - \
 		all->ray->mapx) * all->ray->deltadistx;
 	}
 	else
 	{
-		all->ray->stepx = 1;
+		all->pl->stepx = 1;
 		all->ray->sidedistx = (all->ray->mapx + 1.0 - \
 		all->pl->posx) * all->ray->deltadistx;
 	}
 	if (all->ray->raydiry < 0)
 	{
-		all->ray->stepy = -1;
+		all->pl->stepy = -1;
 		all->ray->sidedisty = (all->pl->posy - \
 		all->ray->mapy) * all->ray->deltadisty;
 	}
 	else
 	{
-		all->ray->stepy = 1;
+		all->pl->stepy = 1;
 		all->ray->sidedisty = (all->ray->mapy + 1.0 - \
 		all->pl->posy) * all->ray->deltadisty;
 	}

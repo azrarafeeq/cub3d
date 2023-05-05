@@ -6,7 +6,7 @@
 /*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:23:16 by arafeeq           #+#    #+#             */
-/*   Updated: 2023/05/05 04:01:46 by arafeeq          ###   ########.fr       */
+/*   Updated: 2023/05/05 06:08:16 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,23 +102,4 @@ int	key(int keycode, t_all *all)
 	mlx_clear_window(all->mlx->mlx, all->mlx->mlx_win);
 	ray_cast(all, all->map);
 	return (0);
-}
-
-void	editbuffer(t_all *all, int ***buffer)
-{
-	int	i;
-
-	i = 2;
-	while (++i < 13)
-		(*buffer)[WIN_HEIGHT / 2 - i][WIN_WIDTH / 2] = 0xFF0000;
-	i = 2;
-	while (++i < 13)
-		(*buffer)[WIN_HEIGHT / 2 + i][WIN_WIDTH / 2] = 0xFF0000;
-	i = 2;
-	while (++i < 13)
-		(*buffer)[WIN_HEIGHT / 2][WIN_WIDTH / 2 - i] = 0xFF0000;
-	i = 2;
-	while (++i < 13)
-		(*buffer)[WIN_HEIGHT / 2][WIN_WIDTH / 2 + i] = 0xFF0000;
-	mlx_clear_window(all->mlx->mlx, all->mlx->mlx_win);
 }

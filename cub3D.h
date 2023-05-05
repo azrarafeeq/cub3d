@@ -6,7 +6,7 @@
 /*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:23:16 by arafeeq           #+#    #+#             */
-/*   Updated: 2023/05/05 04:37:54 by arafeeq          ###   ########.fr       */
+/*   Updated: 2023/05/05 21:13:39 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ typedef struct s_player
 	double	posy;
 	double	plnx;
 	double	plny;
+	int		stepx;
+	int		stepy;
 	double	rt_s;
 	double	movespeed;
 }				t_player;
@@ -67,8 +69,6 @@ typedef struct s_ray
 	int		mapy;
 	double	step;
 	double	wallx;
-	int		stepx;
-	int		stepy;
 	int		color;
 	double	texpos;
 	int		updown;
@@ -125,22 +125,23 @@ typedef struct s_all
 	int			detector_flag;
 }			t_all;
 
-// INITIALIZE STRUCT
+// INITIALIZE STRUCTS AND PLAYER
 
 void	all_struct_init(t_all *all, t_mlx *mlx, t_ray *ray, t_player *player);
 void	direction(t_player *player);
-void	direction_0(t_player *player);
+void	direction_part_1(t_player *player);
 
-// GET MAP
+// PARSING AND GETTING MAP ELEMENTS
 
 void	ft_get_map(t_all *all, char *filename);
-void	ft_map_extension(t_all *all);
-void	ft_read(int fd, t_all *all);
 char	**ft_split_all(char *str, t_all *all);
 void	ft_replace_element(t_all *all);
-char	**ft_2d_dup(char **arr, size_t start, size_t size);
+char	**_2d_array_dup(char **arr, size_t start, size_t size);
+char	*ft_line_replace(char *old, char *new);
 size_t	ft_arr_len(char **arr);
+int		ft_find_index(t_all *all, char **arr, char *s, size_t size);
 void	ft_color_parse(t_all *all);
+size_t	ft_atoi_index(t_all *all, const char *str, size_t i, int error);
 void	ft_map_valid_char(t_all *all, int i, size_t nl);
 void	ft_check_walls(t_all *all);
 void	ft_check_space(t_all *all, int i, int a);
@@ -148,22 +149,19 @@ void	ft_check_zero(t_all *all);
 int		check_wall_collision(t_all *all, char c);
 void	check_pos(char c, t_all *all);
 void	ft_texture(t_all *all);
-void	ft_player_position(t_all *all);
-int		ft_find_index(t_all *all, char **arr, char *s, size_t size);
+size_t	ft_wordcount(char *str);
 
 // RAYCAST
 
-char	*ft_line_replace(char *old, char *new);
 void	initimgs(t_all *all);
 int		ray_cast(t_all *all, char **map);
 void	clearbuffer(t_all *all);
 void	initdrawing(t_all *all, int x);
 void	initdir(t_all *all);
-void	getwallhit(t_all *all, char **map);
-void	getdrawpos(t_all *all, char **map, int *ii);
+void	get_wall_hit(t_all *all, char **map);
+void	get_player_pos(t_all *all, char **map, int *ii);
 void	extracheck(t_all *all);
-void	getandfillwalls(t_all *all, int y, int x, int ii);
-size_t	ft_atoi_index(t_all *all, const char *str, size_t i, int error);
+void	get_walls(t_all *all, int y, int x, int ii);
 
 // KEYS
 
@@ -171,7 +169,6 @@ void	key13_1(t_all *all, int keycode);
 void	key0_2(t_all *all, int keycode);
 void	key124_123(t_all *all, int keycode);
 int		key(int keycode, t_all *all);
-void	editbuffer(t_all *all, int ***buffer);
 int		ft_destroy_free(t_all *all);
 
 // COLOURS
@@ -189,7 +186,7 @@ int		ft_lnbr(int nbr, int base_lenght);
 char	*ft_char(char *dest, char src);
 char	*ft_convert_base(char *nbr, char *base_from, char *base_to);
 
-// ERROR
+// ERROR AND FREE
 
 int		ft_destroy_free(t_all *all);
 void	ft_error(t_all *all, int error);
@@ -198,8 +195,8 @@ void	ft_free_arr(char **arr);
 
 void	extra_imgs(t_all *all);
 void	drawall(t_all *all, int **buffer);
-void	fill_the_void(t_all *all, int y, int x);
-void	filldown(t_all *all, int y, int x);
+void	get_floor_ceil(t_all *all, int y, int x);
+void	fill_ceil(t_all *all, int y, int x);
 void	gettexture(t_all *all, int ii);
 
 #endif

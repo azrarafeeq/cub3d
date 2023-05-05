@@ -6,101 +6,70 @@
 /*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 22:34:41 by aalhmoud          #+#    #+#             */
-/*   Updated: 2023/05/05 04:25:08 by arafeeq          ###   ########.fr       */
+/*   Updated: 2023/05/05 06:24:23 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	ft_read(int fd, t_all *all)
-{
-	char	*mapline;
-	char	*line;
-
-	mapline = ft_strdup("");
-	mapline[0] = 0;
-	line = get_next_line(fd);
-	if (!line)
-	{
-		write(2, "Error: Map is Empty\n", 21);
-		close(fd);
-		ft_error(all, 3);
-		exit(0);
-	}
-	while (line)
-	{
-		mapline = ft_strjoin(mapline, line);
-		line = get_next_line(fd);
-	}
-	all->mapl = mapline;
-}
-
-void	ft_get_map(t_all *all, char *filename)
-{
-	int	fd;
-
-	all->map_file = ft_strdup(filename);
-	ft_map_extension(all);
-	fd = open(all->map_file, O_RDONLY);
-	ft_read(fd, all);
-	close(fd);
-	all->splmap = ft_split_all(all->mapl, all);
-	ft_replace_element(all);
-	all->textures = ft_2d_dup(all->splmap, 0, 4);
-	all->colors = ft_2d_dup(all->splmap, 4, 2);
-	all->map = ft_2d_dup(all->splmap, 6, ft_arr_len(all->splmap) - 6);
-	ft_color_parse(all);
-	ft_map_valid_char(all, -1, 0);
-	if (all->detector_flag == 0)
-		ft_error(all, 5);
-	ft_check_walls(all);
-	ft_check_space(all, -1, -1);
-	ft_check_zero(all);
-	ft_texture(all);
-	ft_player_position(all);
-}
-
-void	ft_player_position(t_all *all)
-{
-	int	x;
-	int	y;
-	int	flag;
-
-	y = -1;
-	flag = 0;
-	while (all->map[++y])
-	{
-		x = -1;
-		while (all->map[y][++x])
-		{
-			if (all->map[y][x] == 'E' || all->map[y][x] == 'S'
-				|| all->map[y][x] == 'W' || all->map[y][x] == 'N')
-			{
-				all->map[y][x] = 'P';
-				flag = 1;
-				break ;
-			}
-		}
-		if (flag)
-			break ;
-	}
-	all->pl->posx = (double)y + 0.5;
-	all->pl->posy = (double)x + 0.5;
-}
-
-void	ft_map_extension(t_all *all)
+size_t	ft_arr_len(char **arr)
 {
 	size_t	i;
 
 	i = 0;
-	if (all->map_file[0] == '.' || ft_strlen(all->map_file) < 5)
-		ft_error(all, 2);
-	while (all->map_file[i])
+	if (!arr)
+		return (0);
+	while (arr[i])
 		i++;
-	i--;
-	if (!(all->map_file[i] == 'b' && all->map_file[i - 1] == 'u'
-			&& all->map_file[i - 2] == 'c' && all->map_file[i - 3] == '.'))
-		ft_error(all, 2);
+	return (i);
+}
+
+void	extra_imgs(t_all *all)
+{
+	all->mlx->tex3 = mlx_xpm_file_to_image(all->mlx
+			->mlx, all->textures[2], &all->mlx->w, &all->mlx->h);
+	all->mlx->text3 = (int *)mlx_get_data_addr(all->mlx->tex3,
+			&all->mlx->b, &all->mlx->h, &all->mlx->w);
+	all->mlx->tex4 = mlx_xpm_file_to_image(all->mlx
+			->mlx, all->textures[3], &all->mlx->w, &all->mlx->h);
+	all->mlx->text4 = (int *)mlx_get_data_addr(all->mlx->tex4,
+			&all->mlx->b, &all->mlx->h, &all->mlx->w);
+}
+
+void	extracheck(t_all *all)
+{
+	if (all->ray->side == 0)
+		all->ray->perpwalldist = (all->ray->sidedistx
+				- all->ray->deltadistx);
+	else
+		all->ray->perpwalldist = (all->ray->sidedisty
+				- all->ray->deltadisty);
+	all->mlx->lineheight = (int)(WIN_HEIGHT / all->ray->perpwalldist);
+	all->mlx->drawstart = -all->mlx->lineheight / 2
+		+ ((WIN_HEIGHT / 2) + all->ray->updown);
+	if (all->mlx->drawstart < 0)
+		all->mlx->drawstart = 0;
+	all->mlx->drawend = all->mlx->lineheight / 2
+		+ ((WIN_HEIGHT / 2) + all->ray->updown);
+}
+
+size_t	ft_wordcount(char *str)
+{
+	size_t	nb;
+	size_t	i;
+
+	nb = 0;
+	i = 0;
+	while (str[i])
+	{
+		while (str[i] && str[i] == '\n')
+			i++;
+		if (str[i] && str[i] != '\n')
+			nb++;
+		while (str[i] && str[i] != '\n')
+			i++;
+	}
+	return (nb);
 }
 
 int	main(int argc, char **argv)

@@ -6,7 +6,7 @@
 /*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:23:16 by arafeeq           #+#    #+#             */
-/*   Updated: 2023/05/05 04:27:40 by arafeeq          ###   ########.fr       */
+/*   Updated: 2023/05/05 21:13:43 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	drawall(t_all *all, int **buffer)
 
 	i = 0;
 	j = 0;
-	editbuffer(all, &buffer);
 	all->mlx->img = mlx_new_image(all->mlx->mlx,
 			WIN_WIDTH, WIN_HEIGHT);
 	texture = (int *)mlx_get_data_addr(all->mlx->img, &all->mlx->b,
@@ -40,7 +39,7 @@ void	drawall(t_all *all, int **buffer)
 	mlx_destroy_image(all->mlx->mlx, all->mlx->img);
 }
 
-void	filldown(t_all *all, int y, int x)
+void	fill_ceil(t_all *all, int y, int x)
 {
 	while (y < WIN_HEIGHT)
 	{
@@ -51,7 +50,7 @@ void	filldown(t_all *all, int y, int x)
 	}
 }
 
-void	fill_the_void(t_all *all, int y, int x)
+void	get_floor_ceil(t_all *all, int y, int x)
 {
 	while (y < all->mlx->drawstart)
 	{
@@ -61,7 +60,7 @@ void	fill_the_void(t_all *all, int y, int x)
 		y++;
 	}
 	y = all->mlx->drawend;
-	filldown(all, y, x);
+	fill_ceil(all, y, x);
 	y = 0;
 	while (y < WIN_HEIGHT)
 	{
@@ -91,7 +90,7 @@ void	gettexture(t_all *all, int ii)
 				->text4[(64 * all->mlx->texy) + all->mlx->texx]);
 }
 
-void	getdrawpos(t_all *all, char **map, int *ii)
+void	get_player_pos(t_all *all, char **map, int *ii)
 {
 	extracheck(all);
 	if (all->mlx->drawend >= WIN_HEIGHT)

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_texture.c                                      :+:      :+:    :+:   */
+/*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arafeeq <arafeeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 22:34:10 by arafeeq           #+#    #+#             */
-/*   Updated: 2023/05/05 04:25:01 by arafeeq          ###   ########.fr       */
+/*   Updated: 2023/05/05 06:25:47 by arafeeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,34 +76,20 @@ char	*ft_line_replace(char *old, char *new)
 
 void	ft_replace_element(t_all *all)
 {
-	char	**arr;
+	char	**array;
 
-	arr = ft_2d_dup(all->splmap, 0, 6);
+	array = _2d_array_dup(all->splmap, 0, 6);
 	all->splmap[0] = ft_line_replace(all->splmap[0],
-			arr[ft_find_index(all, arr, "NO ", 3)]);
+			array[ft_find_index(all, array, "NO ", 3)]);
 	all->splmap[1] = ft_line_replace(all->splmap[1],
-			arr[ft_find_index(all, arr, "SO ", 3)]);
+			array[ft_find_index(all, array, "SO ", 3)]);
 	all->splmap[2] = ft_line_replace(all->splmap[2],
-			arr[ft_find_index(all, arr, "WE ", 3)]);
+			array[ft_find_index(all, array, "WE ", 3)]);
 	all->splmap[3] = ft_line_replace(all->splmap[3],
-			arr[ft_find_index(all, arr, "EA ", 3)]);
+			array[ft_find_index(all, array, "EA ", 3)]);
 	all->splmap[4] = ft_line_replace(all->splmap[4],
-			arr[ft_find_index(all, arr, "F ", 2)]);
+			array[ft_find_index(all, array, "F ", 2)]);
 	all->splmap[5] = ft_line_replace(all->splmap[5],
-			arr[ft_find_index(all, arr, "C ", 2)]);
-	ft_free_arr(arr);
-}
-
-void	ft_color_parse(t_all *all)
-{
-	char	*fc;
-	char	*cc;
-
-	ft_color_chars_checker(all, 2, 0, 0);
-	fc = ft_convert_base(ft_rgb_to_hex(all, all->colors[0], 2), HEX, DEC);
-	cc = ft_convert_base(ft_rgb_to_hex(all, all->colors[1], 2), HEX, DEC);
-	all->mlx->fcolor = ft_atoi_index(all, fc, 0, 6);
-	all->mlx->ccolor = ft_atoi_index(all, cc, 0, 6);
-	free(fc);
-	free(cc);
+			array[ft_find_index(all, array, "C ", 2)]);
+	ft_free_arr(array);
 }
